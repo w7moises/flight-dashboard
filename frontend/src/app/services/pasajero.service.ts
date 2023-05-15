@@ -11,9 +11,9 @@ export class PasajeroService {
 
   constructor(private http: HttpClient) { }
 
-  public getPassengers(page:string , size: string): Observable<any> {
-    const params= new HttpParams().set('page',page).set('size',size);
-    return this.http.get<any>(`${this.baseEndPoint}/pasajeros/page`, {params: params});
+  public getPassengers(page: string, size: string): Observable<any> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<any>(`${this.baseEndPoint}/pasajeros/page`, { params: params });
   }
 
   public getPassengerById(id: number): Observable<Pasajero> {

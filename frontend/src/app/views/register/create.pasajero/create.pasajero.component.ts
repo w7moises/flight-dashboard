@@ -18,7 +18,6 @@ export class CreatePasajeroComponent {
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-
     this.passengerForm = new FormGroup({
       first_name: new FormControl('', Validators.required),
       second_name: new FormControl('', Validators.required),
@@ -67,7 +66,6 @@ export class CreatePasajeroComponent {
         updateBody.city = this.passengerForm.get('city')?.value;
         updateBody.country = this.passengerForm.get('country')?.value;
         updateBody.other_details = this.passengerForm.get('other_details')?.value;
-        console.log(updateBody);
         this.service.updatePassenger(this.id, updateBody).subscribe((data: any) => { this.redirectTo('dashboard/agente/pasajero'); });
       } else {
         this.service.createPassenger(body).subscribe((data: any) => { this.redirectTo('dashboard/agente/pasajero'); });

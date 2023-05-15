@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Agente } from '../models/agente';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +11,25 @@ export class AgenteService {
 
   constructor(private http: HttpClient) { }
 
-  public getAgentes() {
-    return this.http.get(`${this.baseEndPoint}/agentes`);
+  public getAgents(page: string, size: string): Observable<any> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<any>(`${this.baseEndPoint}/agentes/page`, { params: params });
   }
 
-  public getAgente(id: number) {
-    return this.http.get(`${this.baseEndPoint}/agentes/${id}`);
+  public getAgentById(id: number): Observable<Agente> {
+    return this.http.get<Agente>(`${this.baseEndPoint}/agentes/${id}`);
   }
 
-  public createAgente(agente: Agente) {
-    return this.http.post(`${this.baseEndPoint}/agentes`, agente);
+  public createAgent(agente: Agente): Observable<Agente> {
+    return this.http.post<Agente>(`${this.baseEndPoint}/agentes`, agente);
   }
 
-  public updateAgente(id: number, agente: Agente) {
-    return this.http.put(`${this.baseEndPoint}/agentes/${id}`, agente);
+  public updateAgent(id: number, agente: Agente): Observable<Agente> {
+    return this.http.put<Agente>(`${this.baseEndPoint}/agentes/${id}`, agente);
   }
 
-  public deleteAgente(id: number) {
-    return this.http.delete(`${this.baseEndPoint}/agentes/${id}`);
+  public deleteAgent(id: number): Observable<Agente> {
+    return this.http.delete<Agente>(`${this.baseEndPoint}/agentes/${id}`);
   }
-  
+
 }

@@ -52,7 +52,7 @@
                                             Por favor, escriba el nombre del agente
                                         </p>
                                         <div class="form-group mt-3"><label>Detalles del agente</label> <input
-                                                type="password" placeholder="Ingresar detalles del agente"
+                                                type="text" placeholder="Ingresar detalles del agente"
                                                 formControlName="agent_details" class="form-control"></div>
                                         <p style="color: red" class="error" *ngIf="
                                             agentForm.get('agent_details')?.errors &&
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
-                                        type="submit"><strong>Guardar</strong></button>
+                                        type="submit" (click)="createAgent()"><strong>Guardar</strong></button>
                                 </div>
                             </div>
                         </div>

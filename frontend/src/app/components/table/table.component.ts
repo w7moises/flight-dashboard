@@ -6,6 +6,7 @@ import { ModalDeleteComponent } from '../modal.delete/modal.delete.component';
 import { PasajeroService } from 'src/app/services/pasajero.service';
 import { Pasajero } from 'src/app/models/pasajero';
 import { Agente } from 'src/app/models/agente';
+import { AgenteService } from 'src/app/services/agente.service';
 
 @Component({
   selector: 'app-table',
@@ -30,7 +31,8 @@ export class TableComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private router: Router, private dialog: MatDialog, private pasajeroService: PasajeroService) { }
+  constructor(private router: Router, private dialog: MatDialog, private pasajeroService: PasajeroService,
+    private agenteService: AgenteService) { }
 
   ngOnInit(): void {
     this.calculateRange();
@@ -56,7 +58,10 @@ export class TableComponent {
       });
     }
     if (this.data == 'supervisor') {
-      this.agenteFlag = true;
+      this.agenteService.getAgents(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
+        this.totalRegisters = data.totalElements as number;
+        this.agentePage = data.content as Agente[];
+      });
     }
   }
 
@@ -72,7 +77,9 @@ export class TableComponent {
     if (this.data == 'agente/pasajero') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.passenger_id }]);
     }
-    this.router.navigate(['dashboard/' + this.data + '/create', { id: 1 }]);
+    else {
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.agent_id }]);
+    }
   }
 
   public delete(data: any) {
