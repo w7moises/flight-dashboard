@@ -1,0 +1,75 @@
+<div class="wrapper-sidebar">
+    <div class="sidebar" style="background-color: #2F4050;">
+        <h2>Sidebar</h2>
+        <ul style="padding: 0;">
+            <li (click)="redirectTo('dashboard/supervisor')"><a><i class="fas fa-home"></i>Agentes</a></li>
+            <li (click)="redirectTo('dashboard/supervisor/aereopuertos')"><a><i class="fas fa-home"></i>Aereopuertos</a>
+            </li>
+            <li (click)="redirectTo('dashboard/supervisor/vuelos')"><a><i class="fas fa-home"></i>Vuelos</a></li>
+        </ul>
+    </div>
+    <div class="main_content">
+        <app-topnavbar></app-topnavbar>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2 class="mt-4">Concepto de Agente</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a>Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Concepto de Agente</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>{{title}} agente</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>{{title}} nuevo agente
+                            </h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <form role="form" [formGroup]="agentForm">
+                                        <div class="form-group"><label>Nombre del agente</label> <input type="email"
+                                                placeholder="Ingresar nombre del agente" formControlName="agent_name"
+                                                class="form-control"></div>
+                                        <p style="color: red" class="error" *ngIf="
+                                            agentForm.get('agent_name')?.errors &&
+                                            (agentForm.get('agent_name')?.touched || agentForm.get('agent_name')?.dirty)
+                                          ">
+                                            Por favor, escriba el nombre del agente
+                                        </p>
+                                        <div class="form-group mt-3"><label>Detalles del agente</label> <input
+                                                type="password" placeholder="Ingresar detalles del agente"
+                                                formControlName="agent_details" class="form-control"></div>
+                                        <p style="color: red" class="error" *ngIf="
+                                            agentForm.get('agent_details')?.errors &&
+                                            (agentForm.get('agent_details')?.touched || agentForm.get('agent_details')?.dirty)
+                                          ">
+                                            Por favor, escriba detalles del agente
+                                        </p>
+                                    </form>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
+                                        type="submit"><strong>Guardar</strong></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

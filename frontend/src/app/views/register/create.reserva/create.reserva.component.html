@@ -1,0 +1,89 @@
+<div class="wrapper-sidebar">
+    <div class="sidebar" style="background-color: #2F4050;">
+        <h2>Sidebar</h2>
+        <ul style="padding: 0;">
+            <li (click)="redirectTo('dashboard/agente')"><a><i class="fas fa-home"></i>Reservas</a></li>
+            <li (click)="redirectTo('dashboard/agente/pasajero')"><a><i class="fas fa-home"></i>Pasajeros</a></li>
+        </ul>
+    </div>
+    <div class="main_content">
+        <app-topnavbar></app-topnavbar>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2 class="mt-4">Concepto de Reserva</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a>Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Concepto de Reserva</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>{{title}} reserva</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>{{title}} nueva reserva
+                            </h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <form role="form">
+                                        <div class="form-group"><label>Nombre del pasajero</label><input type="text"
+                                                formControlName="name" placeholder="Ingresar nombre del pasajero"
+                                                class="form-control"></div>
+                                        <div class="form-group mt-3"><label>Tipo de asiento</label> <input type="email"
+                                                placeholder="Ingresar el tipo de asiento" class="form-control"></div>
+
+                                        <div class="form-group mt-3"><label>Salida</label> <input type="email"
+                                                placeholder="Ingresar el aereopuerto de origen" class="form-control">
+                                        </div>
+                                        <div class="form-group mt-3"><label>Llegada</label> <input type="email"
+                                                placeholder="Ingresar el aereopuerto de llegada" class="form-control">
+                                        </div>
+                                        <div class="form-group mt-3"><label>Fecha de Salida</label>
+                                        </div>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Escoje una fecha</mat-label>
+                                            <input matInput [matDatepicker]="pickerOut">
+                                            <mat-datepicker-toggle matIconSuffix
+                                                [for]="pickerOut"></mat-datepicker-toggle>
+                                            <mat-datepicker #pickerOut></mat-datepicker>
+                                        </mat-form-field>
+                                        <div class="form-group"><label>Fecha de Llegada</label>
+                                        </div>
+                                        <mat-form-field appearance="fill" class="h-50">
+                                            <mat-label>Escoje una fecha</mat-label>
+                                            <input matInput [matDatepicker]="pickerIn">
+                                            <mat-datepicker-toggle matIconSuffix
+                                                [for]="pickerIn"></mat-datepicker-toggle>
+                                            <mat-datepicker #pickerIn></mat-datepicker>
+                                        </mat-form-field>
+                                        <div class="form-group mt-3"><label>Número de asientos</label> <input
+                                                type="number" placeholder="Ingresar cantidad de asientos"
+                                                class="form-control">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
+                                        type="submit"><strong>Guardar</strong></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

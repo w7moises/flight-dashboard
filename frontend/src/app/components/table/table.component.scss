@@ -1,0 +1,12 @@
+::ng-deep .mdc-notched-outline>* {
+    border-color: black !important;
+}
+
+::ng-deep .mdc-text-field--focused .mdc-notched-outline>* {
+    border-color: #1ab394 !important;
+    color: black !important;
+}
+
+::ng-deep .mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
+    color: #1ab394 !important;
+}

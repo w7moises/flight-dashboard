@@ -1,0 +1,33 @@
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">WM</h1>
+        </div>
+        <h3>Bienvenido</h3>
+        <p>Aplicación de aereolíneas.
+        </p>
+        <p>Inicia sesión para ver más funcionalidades</p>
+        <form class="m-t" role="form" [formGroup]="loginForm">
+            <div class="form-group">
+                <input type="email" class="form-control" formControlName="email" placeholder="Username" required="">
+            </div>
+            <p style="color: red" class="error" *ngIf="
+              loginForm.get('email')?.errors &&
+              (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
+            ">
+                Por favor, escriba su usuario
+            </p>
+            <div class="form-group m-t">
+                <input type="password" class="form-control" formControlName="password" placeholder="Password"
+                    required="">
+            </div>
+            <p style="color: red" class="error" *ngIf="
+              loginForm.get('password')?.errors &&
+              (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+            ">
+                Por favor, escriba su password
+            </p>
+            <button type="submit" class="btn btn-primary block full-width m-b m-t" (click)="login()">Login</button>
+        </form>
+    </div>
+</div>

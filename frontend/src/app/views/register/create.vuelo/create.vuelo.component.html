@@ -1,0 +1,289 @@
+<div class="wrapper-sidebar">
+    <div class="sidebar" style="background-color: #2F4050;">
+        <h2>Sidebar</h2>
+        <ul style="padding: 0;">
+            <li (click)="redirectTo('dashboard/supervisor')"><a><i class="fas fa-home"></i>Agentes</a></li>
+            <li (click)="redirectTo('dashboard/supervisor/aereopuertos')"><a><i class="fas fa-home"></i>Aereopuertos</a>
+            </li>
+            <li (click)="redirectTo('dashboard/supervisor/vuelos')"><a><i class="fas fa-home"></i>Vuelos</a></li>
+        </ul>
+    </div>
+    <div class="main_content">
+        <app-topnavbar></app-topnavbar>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <h2 class="mt-4">Concepto de vuelos</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a>Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Concepto de Vuelos</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>{{title}} vuelos</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <mat-stepper [linear]="false" #stepper>
+                        <mat-step>
+                            <ng-template matStepLabel>Vuelo</ng-template>
+                            <div class="ibox float-e-margins mt-3">
+                                <div class="ibox-title">
+                                    <h5>{{title}} Nuevo vuelo
+                                    </h5>
+                                    <div ibox-tools></div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <form role="form" [formGroup]="flightForm">
+                                                <div class="form-group w-50"><label>Aereolínea</label> <input
+                                                        type="email" placeholder="Ingresar nombre de la aereolínea"
+                                                        class="form-control"></div>
+                                                <div class="form-group mt-3 w-50"><label>Avión</label> <input
+                                                        type="password" placeholder="Ingresar modelo del avión"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Origen</label>
+                                                    <input type="password" placeholder="Ingresar aereopuerto de salida"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Destino</label>
+                                                    <input type="password" placeholder="Ingresar aereopuerto de llegada"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <label>Fecha inicial</label>
+                                                    <mat-form-field appearance="fill" class="d-flex w-50">
+                                                        <mat-label>Ingresar fecha inicial</mat-label>
+                                                        <input matInput [matDatepicker]="pickerIn1">
+                                                        <mat-datepicker-toggle matIconSuffix
+                                                            [for]="pickerIn1"></mat-datepicker-toggle>
+                                                        <mat-datepicker #pickerIn1></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group w-50"><label>Hora inicial</label>
+                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                </div>
+                                                <div class="form-group mt-3 w-50">
+                                                    <label>Fecha final</label>
+                                                    <mat-form-field appearance="fill" class="d-flex">
+                                                        <mat-label>Ingresar fecha final</mat-label>
+                                                        <input matInput [matDatepicker]="pickerOut1">
+                                                        <mat-datepicker-toggle matIconSuffix
+                                                            [for]="pickerOut1"></mat-datepicker-toggle>
+                                                        <mat-datepicker #pickerOut1></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group w-50"><label>Hora Final</label>
+                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                style="float: right;" matStepperNext><strong>Siguiente</strong></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>Escalas</ng-template>
+                            <div class="ibox float-e-margins mt-3">
+                                <div class="ibox-title">
+                                    <h5>{{title}} nuevas escalas
+                                    </h5>
+                                    <div ibox-tools></div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <form role="form" [formGroup]="legForm">
+                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Origen</label>
+                                                    <input type="password" placeholder="Ingresar aereopuerto de salida"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Destino</label>
+                                                    <input type="password" placeholder="Ingresar aereopuerto de llegada"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <label>Fecha inicial</label>
+                                                    <br>
+                                                    <mat-form-field appearance="fill" class="d-flex w-50">
+                                                        <mat-label>Ingresar fecha inicial</mat-label>
+                                                        <input matInput [matDatepicker]="pickerIn2">
+                                                        <mat-datepicker-toggle matIconSuffix
+                                                            [for]="pickerIn2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #pickerIn2></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group w-50"><label>Hora inicial</label>
+                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                </div>
+                                                <div class="form-group mt-3">
+                                                    <label>Fecha final</label>
+                                                    <br>
+                                                    <mat-form-field appearance="fill" class="d-flex w-50">
+                                                        <mat-label>Ingresar fecha final</mat-label>
+                                                        <input matInput [matDatepicker]="pickerOut2">
+                                                        <mat-datepicker-toggle matIconSuffix
+                                                            [for]="pickerOut2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #pickerOut2></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group w-50"><label>Hora Final</label>
+                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-sm-4 mt-4">
+                                            <table
+                                                class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-toggle="true"
+                                                            class="footable-visible footable-sortable footable-v-column">
+                                                            Aereopuerto Origen<span
+                                                                class="footable-sort-indicator"></span></th>
+                                                        <th class="footable-visible footable-sortable">Aereopuerto
+                                                            Destino<span class="footable-sort-indicator"></span></th>
+                                                        <th data-type="numeric"
+                                                            class="footable-visible footable-sortable">Fecha
+                                                            inicial<span class="footable-sort-indicator"></span></th>
+                                                        <th data-type="numeric"
+                                                            class="footable-visible footable-sortable">Fecha
+                                                            final<span class="footable-sort-indicator"></span></th>
+                                                        <th
+                                                            class="footable-visible footable-sortable footable-last-column">
+                                                            Action<span class="footable-sort-indicator"></span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="footable-even" style="">
+                                                        <td class="footable-visible footable-first-column"><span
+                                                                class="footable-toggle"></span>Jorge chavez</td>
+                                                        <td class="footable-visible">Jorge Chavez</td>
+                                                        <td class="footable-visible">22/05/2022</td>
+                                                        <td class="footable-visible">22/05/2022</td>
+                                                        <td class="footable-visible footable-last-column">
+                                                            <p style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;X</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                style="float: right;" matStepperNext><strong>Siguiente</strong></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>Costos</ng-template>
+                            <div class="ibox float-e-margins mt-3">
+                                <div class="ibox-title">
+                                    <h5>{{title}} nuevos costos
+                                    </h5>
+                                    <div ibox-tools></div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <form role="form" [formGroup]="costForm">
+                                                <div class="form-group"><label>Fecha inicial</label>
+                                                </div>
+                                                <mat-form-field appearance="fill" class="d-flex w-75">
+                                                    <mat-label>Ingresar fecha inicial</mat-label>
+                                                    <input matInput [matDatepicker]="valid_from_date"
+                                                        formControlName="valid_from_date">
+                                                    <mat-datepicker-toggle matIconSuffix
+                                                        [for]="valid_from_date"></mat-datepicker-toggle>
+                                                    <mat-datepicker #valid_from_date></mat-datepicker>
+                                                </mat-form-field>
+                                                <div class="form-group mt-3"><label>Fecha final</label></div>
+                                                <mat-form-field appearance="fill" class="d-flex w-75">
+                                                    <mat-label>Ingresar fecha final</mat-label>
+                                                    <input matInput [matDatepicker]="valid_to_date"
+                                                        formControlName="valid_to_date">
+                                                    <mat-datepicker-toggle matIconSuffix
+                                                        [for]="valid_to_date"></mat-datepicker-toggle>
+                                                    <mat-datepicker #valid_to_date></mat-datepicker>
+                                                </mat-form-field>
+                                                <div class="form-group w-75 mt-3"><label>Monto</label> <input
+                                                        type="number" formControlName="flight_cost"
+                                                        placeholder="Ingresar el monto total de los costos"
+                                                        class="form-control"></div>
+                                                <p style="color: red" class="error" *ngIf="
+                                                        costForm.get('flight_cost')?.errors &&
+                                                        (costForm.get('flight_cost')?.touched || costForm.get('flight_cost')?.dirty)
+                                                      ">
+                                                    Por favor, escriba algun monto
+                                                </p>
+                                            </form>
+                                        </div>
+                                        <div class="col-sm-6 mt-4">
+                                            <table
+                                                class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-toggle="true"
+                                                            class="footable-visible footable-sortable footable-first-column">
+                                                            Monto<span class="footable-sort-indicator"></span></th>
+                                                        <th data-type="numeric"
+                                                            class="footable-visible footable-sortable">Fecha
+                                                            inicial<span class="footable-sort-indicator"></span></th>
+                                                        <th data-hide="all" class="footable-sortable"
+                                                            style="display: none;">Fecha final<span
+                                                                class="footable-sort-indicator"></span></th>
+                                                        <th
+                                                            class="footable-visible footable-sortable footable-last-column">
+                                                            Action<span class="footable-sort-indicator"></span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="footable-even" style="">
+                                                        <td class="footable-visible footable-first-column"><span
+                                                                class="footable-toggle"></span>1500</td>
+                                                        <td class="footable-visible">22/05/2022</td>
+                                                        <td class="footable-visible">22/06/2022</td>
+                                                        <td class="footable-visible footable-last-column">
+                                                            <p style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;X</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                (click)="addCost()" style="float: right;"
+                                                matStepperNext><strong>Siguiente</strong></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-step>
+                        <mat-step>
+                            <ng-template matStepLabel>Done</ng-template>
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
+                                    type="submit"><strong>Guardar</strong></button>
+                            </div>
+                        </mat-step>
+                    </mat-stepper>
+
+                </div>
+            </div>
+        </div>
+    </div>

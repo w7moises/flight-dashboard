@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="sidebar" style="background-color: #2F4050;">
+        <h2>Sidebar</h2>
+        <ul>
+            <li (click)="redirectTo('dashboard/supervisor')"><a><i class="fas fa-home"></i>Agentes</a></li>
+            <li (click)="redirectTo('dashboard/supervisor/aereopuertos')"><a><i class="fas fa-home"></i>Aereopuertos</a></li>
+            <li (click)="redirectTo('dashboard/supervisor/vuelos')"><a><i class="fas fa-home"></i>Vuelos</a></li>
+        </ul>
+    </div>
+    <div class="main_content">
+        <app-topnavbar></app-topnavbar>
+        <app-table [paths]="paths" [title]="title" [data]="data"></app-table>
+    </div>
+</div>
