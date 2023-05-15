@@ -1,8 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { ModalDeleteComponent } from '../modal.delete/modal.delete.component';
+import { PasajeroService } from 'src/app/services/pasajero.service';
+import { Pasajero } from 'src/app/models/pasajero';
+import { Agente } from 'src/app/models/agente';
 
 @Component({
   selector: 'app-table',
@@ -14,16 +17,29 @@ export class TableComponent {
   @Input() title: string = '';
   @Input() data: string = '';
   @Input() state: boolean = true;
+  @Input() body: string[] = [];
+  pasajeroPage: Pasajero[] = [];
+  pasajeroFlag: boolean = false;
+  agentePage: Agente[] = [];
+  agenteFlag: boolean = false;
   totalRegisters: number = 0;
   flag: boolean = false;
   actualPage: number = 0;
   totalPage: number = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
-  constructor(private router: Router, private dialog: MatDialog) { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private router: Router, private dialog: MatDialog, private pasajeroService: PasajeroService) { }
 
   ngOnInit(): void {
-
+    this.calculateRange();
+    if (this.data == 'agente/pasajero') {
+      this.pasajeroFlag = true;
+    }
+    if (this.data == 'supervisor') {
+      this.agenteFlag = true;
+    }
   }
 
   paging(event: PageEvent): void {
@@ -33,7 +49,15 @@ export class TableComponent {
   }
 
   private calculateRange() {
-
+    if (this.data == 'agente/pasajero') {
+      this.pasajeroService.getPassengers(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
+        this.totalRegisters = data.totalElements as number;
+        this.pasajeroPage = data.content as Pasajero[];
+      });
+    }
+    if (this.data == 'supervisor') {
+      this.agenteFlag = true;
+    }
   }
 
   public redirectTo(uri: string) {
@@ -45,16 +69,19 @@ export class TableComponent {
   }
 
   public edit(body: any) {
+    if (this.data == 'agente/pasajero') {
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.passenger_id }]);
+    }
     this.router.navigate(['dashboard/' + this.data + '/create', { id: 1 }]);
   }
 
-  public delete() {
+  public delete(data: any) {
     const dialogRef = this.dialog.open(ModalDeleteComponent, {
-      data: 'hola',
+      data: data,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.calculateRange();
     });
   }
 }

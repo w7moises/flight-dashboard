@@ -59,7 +59,7 @@
                                             Por favor, escriba su segundo nombre
                                         </p>
                                         <div class="form-group mt-3"><label>Apellidos del pasajero</label>
-                                            <input type="password" placeholder="Ingresar los apellidos"
+                                            <input type="text" placeholder="Ingresar los apellidos"
                                                 formControlName="last_name" class="form-control">
                                         </div>
                                         <p style="color: red" class="error" *ngIf="passengerForm.get('last_name')?.errors &&
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
-                                        type="submit"><strong>Guardar</strong></button>
+                                        type="submit" (click)="createPassenger()"><strong>Guardar</strong></button>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pasajero } from '../models/pasajero';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +11,24 @@ export class PasajeroService {
 
   constructor(private http: HttpClient) { }
 
-  public getPasajeros() {
-    return this.http.get(`${this.baseEndPoint}/pasajeros`);
+  public getPassengers(page:string , size: string): Observable<any> {
+    const params= new HttpParams().set('page',page).set('size',size);
+    return this.http.get<any>(`${this.baseEndPoint}/pasajeros/page`, {params: params});
   }
 
-  public getPasajero(id: number) {
-    return this.http.get(`${this.baseEndPoint}/pasajeros/${id}`);
+  public getPassengerById(id: number): Observable<Pasajero> {
+    return this.http.get<Pasajero>(`${this.baseEndPoint}/pasajeros/${id}`);
   }
 
-  public createPasajero(pasajero: Pasajero) {
-    return this.http.post(`${this.baseEndPoint}/pasajeros`, pasajero);
+  public createPassenger(pasajero: Pasajero): Observable<Pasajero> {
+    return this.http.post<Pasajero>(`${this.baseEndPoint}/pasajeros`, pasajero);
   }
 
-  public updatePasajero(id: number, pasajero: Pasajero) {
-    return this.http.put(`${this.baseEndPoint}/pasajeros/${id}`, pasajero);
+  public updatePassenger(id: number, pasajero: Pasajero): Observable<Pasajero> {
+    return this.http.put<Pasajero>(`${this.baseEndPoint}/pasajeros/${id}`, pasajero);
   }
 
-  public deletePasajero(id: number) {
-    return this.http.delete(`${this.baseEndPoint}/pasajeros/${id}`);
+  public deletePassenger(id: number): Observable<Pasajero> {
+    return this.http.delete<Pasajero>(`${this.baseEndPoint}/pasajeros/${id}`);
   }
 }

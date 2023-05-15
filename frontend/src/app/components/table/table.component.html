@@ -32,53 +32,101 @@
             </div>
           </div>
           <table class="footable table table-stripped footable-loaded default mt-3" data-page-size="8"
-            data-filter="#filter">
+            data-filter="#filter" *ngIf="pasajeroFlag">
             <thead>
               <tr>
-                <th class="footable-visible footable-sortable footable-first-column">Rendering engine<span
+                <th class="footable-visible footable-sortable footable-first-column">Id<span
                     class="footable-sort-indicator"></span></th>
-                <th class="footable-visible footable-sortable">Browser<span class="footable-sort-indicator"></span></th>
-                <th data-hide="phone,tablet" class="footable-sortable footable-visible" style="">Platform(s)<span
+                <th class="footable-visible footable-sortable footable-first-column">Primer nombre<span
                     class="footable-sort-indicator"></span></th>
-                <th data-hide="phone,tablet" class="footable-sortable footable-visible" style="">Engine version<span
+                <th class="footable-visible footable-sortable footable-first-column">Segundo nombre<span
                     class="footable-sort-indicator"></span></th>
-                <th data-hide="phone,tablet" class="footable-sortable footable-visible footable-last-column" style="">
-                  CSS grade<span class="footable-sort-indicator"></span></th>
-                <th data-hide="phone,tablet" class="footable-sortable footable-visible footable-last-column" style="">
-                  Acciones<span class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Apellido<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Teléfono<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Email<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Ciudad<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">País<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Detalles<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Acciones<span
+                    class="footable-sort-indicator"></span></th>
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" style="">
-                <td class="footable-visible footable-first-column"><span class="footable-toggle"></span>Trident1</td>
-                <td class="footable-visible">Internet
-                  Explorer 4.0
+              <tr class="gradeX footable-even" *ngFor="let pasajero of pasajeroPage">
+                <td class="footable-visible">
+                  {{pasajero.passenger_id}}
                 </td>
-                <td class="footable-visible" style="">Win 95+</td>
-                <td class="center footable-visible" style="">4</td>
-                <td class="center footable-visible footable-last-column" style="">X</td>
+                <td class="footable-visible">
+                  {{pasajero.first_name}}
+                </td>
+                <td class="footable-visible">
+                  {{pasajero.second_name}}
+                </td>
+                <td class="footable-visible">
+                  {{pasajero.last_name}}
+                </td>
+                <td class="footable-visible">
+                  {{pasajero.phone_number}}
+                </td>
+                <td class="footable-visible">
+                  {{pasajero.email_address}}
+                </td>
+                <td class="footable-visible">
+                  {{pasajero.city}}
+                </td>
+                <td class="footable-visible">
+                  {{pasajero.country}}
+                </td>
+                <td class="footable-visible">
+                  {{pasajero.other_details}}
+                </td>
                 <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
-                    (click)="edit('a')">
+                    (click)="edit(pasajero)">
                     &nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
                   <button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
-                    (click)="delete()">
-                    Cancelar</button>
+                    (click)="delete(pasajero)">
+                    Eliminar</button>
                 </td>
               </tr>
-              <tr class="gradeC footable-odd" style="">
-                <td class="footable-visible footable-first-column"><span class="footable-toggle"></span>Trident</td>
-                <td class="footable-visible">Internet
-                  Explorer 5.0
+            </tbody>
+          </table>
+          <table class="footable table table-stripped footable-loaded default mt-3" data-page-size="8"
+            data-filter="#filter" *ngIf="agenteFlag">
+            <thead>
+              <tr>
+                <th class="footable-visible footable-sortable footable-first-column">Id<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Nombre del agente<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Detalles<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Acciones<span
+                    class="footable-sort-indicator"></span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="gradeX footable-even" *ngFor="let agente of agentePage">
+                <td class="footable-visible">
+                  {{agente.agent_id}}
                 </td>
-                <td class="footable-visible" style="">Win 95+</td>
-                <td class="center footable-visible" style="">5</td>
-                <td class="center footable-visible footable-last-column" style="">C</td>
-                <td><button type="button" (click)="edit('a')"
-                    class="subscribe btn btn-primary btn-block rounded-pill shadow-sm">
-                    &nbsp;Editar&nbsp;&nbsp;&nbsp; </button>
+                <td class="footable-visible">
+                  {{agente.agent_name}}
+                </td>
+                <td class="footable-visible">
+                  {{agente.agent_details}}
+                </td>
+                <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
+                    (click)="edit(agente)">
+                    &nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
                   <button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
-                    (click)="delete()">
-                    Cancelar</button>
+                    (click)="delete(agente)">
+                    Eliminar</button>
                 </td>
               </tr>
             </tbody>

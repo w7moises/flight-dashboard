@@ -23,6 +23,7 @@ import { CreateAgenteComponent } from './views/register/create.agente/create.age
 import { CreatePasajeroComponent } from './views/register/create.pasajero/create.pasajero.component';
 import { CreateReservaComponent } from './views/register/create.reserva/create.reserva.component';
 import { CreateVueloComponent } from './views/register/create.vuelo/create.vuelo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CreateVueloComponent } from './views/register/create.vuelo/create.vuelo
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
