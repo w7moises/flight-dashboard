@@ -7,6 +7,8 @@ import { PasajeroService } from 'src/app/services/pasajero.service';
 import { Pasajero } from 'src/app/models/pasajero';
 import { Agente } from 'src/app/models/agente';
 import { AgenteService } from 'src/app/services/agente.service';
+import { Aereopuerto } from 'src/app/models/aereopuerto';
+import { AereopuertoService } from 'src/app/services/aereopuerto.service';
 
 @Component({
   selector: 'app-table',
@@ -23,6 +25,8 @@ export class TableComponent {
   pasajeroFlag: boolean = false;
   agentePage: Agente[] = [];
   agenteFlag: boolean = false;
+  aereopuertoPage: Aereopuerto[] = [];
+  aereopuertoFlag: boolean = false;
   totalRegisters: number = 0;
   flag: boolean = false;
   actualPage: number = 0;
@@ -32,7 +36,7 @@ export class TableComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private router: Router, private dialog: MatDialog, private pasajeroService: PasajeroService,
-    private agenteService: AgenteService) { }
+    private agenteService: AgenteService, private aereopuertoService: AereopuertoService) { }
 
   ngOnInit(): void {
     this.calculateRange();
@@ -41,6 +45,9 @@ export class TableComponent {
     }
     if (this.data == 'supervisor') {
       this.agenteFlag = true;
+    }
+    if (this.data == 'supervisor/aereopuertos') {
+      this.aereopuertoFlag = true;
     }
   }
 
@@ -63,6 +70,12 @@ export class TableComponent {
         this.agentePage = data.content as Agente[];
       });
     }
+    if (this.data == 'supervisor/aereopuertos') {
+      this.aereopuertoService.getAirports(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
+        this.totalRegisters = data.totalElements as number;
+        this.aereopuertoPage = data.content as Aereopuerto[];
+      });
+    }
   }
 
   public redirectTo(uri: string) {
@@ -77,8 +90,11 @@ export class TableComponent {
     if (this.data == 'agente/pasajero') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.passenger_id }]);
     }
-    else {
+    if (this.data == 'supervisor') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.agent_id }]);
+    }
+    if (this.data == 'supervisor/aereopuertos') {
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.airport_id }]);
     }
   }
 

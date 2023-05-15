@@ -131,6 +131,46 @@
               </tr>
             </tbody>
           </table>
+          <table class="footable table table-stripped footable-loaded default mt-3" data-page-size="8"
+            data-filter="#filter" *ngIf="aereopuertoFlag">
+            <thead>
+              <tr>
+                <th class="footable-visible footable-sortable footable-first-column">Id<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Nombre del aereopuerto<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Ubicación<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Detalles<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Acciones<span
+                    class="footable-sort-indicator"></span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="gradeX footable-even" *ngFor="let aereopuerto of aereopuertoPage">
+                <td class="footable-visible">
+                  {{aereopuerto.airport_id}}
+                </td>
+                <td class="footable-visible">
+                  {{aereopuerto.airport_name}}
+                </td>
+                <td class="footable-visible">
+                  {{aereopuerto.airport_location}}
+                </td>
+                <td class="footable-visible">
+                  {{aereopuerto.other_details}}
+                </td>
+                <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
+                    (click)="edit(aereopuerto)">
+                    &nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
+                  <button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
+                    (click)="delete(aereopuerto)">
+                    Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <mat-paginator [length]="totalRegisters" [pageSize]="totalPage" [pageIndex]="actualPage"
             [pageSizeOptions]="pageSizeOptions" (page)="paging($event)" showFirstLastButtons class="mx-2">
           </mat-paginator>

@@ -52,7 +52,7 @@
                                           ">
                                             Por favor, escriba el nombre del aereopuerto
                                         </p>
-                                        <div class="form-group mt-3"><label>Localización</label> <input type="password"
+                                        <div class="form-group mt-3"><label>Localización</label> <input type="text"
                                                 formControlName="airport_location" placeholder="Ingresar dirección"
                                                 class="form-control"></div>
                                         <p style="color: red" class="error" *ngIf="
@@ -61,7 +61,7 @@
                                           ">
                                             Por favor, escriba la locación del aereopuerto
                                         </p>
-                                        <div class="form-group mt-3"><label>Detalles</label> <input type="password"
+                                        <div class="form-group mt-3"><label>Detalles</label> <input type="text"
                                                 formControlName="other_details" placeholder="Ingresar descripción"
                                                 class="form-control"></div>
                                         <p style="color: red" class="error" *ngIf="
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
-                                        type="submit"><strong>Guardar</strong></button>
+                                        type="submit" (click)="createAirport()"><strong>Guardar</strong></button>
                                 </div>
                             </div>
                         </div>

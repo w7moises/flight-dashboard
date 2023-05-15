@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Aereopuerto } from '../models/aereopuerto';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +11,25 @@ export class AereopuertoService {
 
   constructor(private http: HttpClient) { }
 
-  public getAereopuertos() {
-    return this.http.get(`${this.baseEndPoint}/aereopuertos`);
+  public getAirports(page: string, size: string): Observable<any> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get(`${this.baseEndPoint}/aereopuertos/page`, { params: params });
   }
 
-  public getAereopuerto(id: number) {
-    return this.http.get(`${this.baseEndPoint}/aereopuertos/${id}`);
+  public getAirportById(id: number): Observable<Aereopuerto> {
+    return this.http.get<Aereopuerto>(`${this.baseEndPoint}/aereopuertos/${id}`);
   }
 
-  public createAereopuerto(aereopuerto: Aereopuerto) {
-    return this.http.post(`${this.baseEndPoint}/aereopuertos`, aereopuerto);
+  public createAirport(aereopuerto: Aereopuerto): Observable<Aereopuerto> {
+    return this.http.post<Aereopuerto>(`${this.baseEndPoint}/aereopuertos`, aereopuerto);
   }
 
-  public updateAereopuerto(id: number, aereopuerto: Aereopuerto) {
-    return this.http.put(`${this.baseEndPoint}/aereopuertos/${id}`, aereopuerto);
+  public updateAirport(id: number, aereopuerto: Aereopuerto): Observable<Aereopuerto> {
+    return this.http.put<Aereopuerto>(`${this.baseEndPoint}/aereopuertos/${id}`, aereopuerto);
   }
 
-  public deleteAereopuerto(id: number) {
-    return this.http.delete(`${this.baseEndPoint}/aereopuertos/${id}`);
+  public deleteAirport(id: number): Observable<Aereopuerto> {
+    return this.http.delete<Aereopuerto>(`${this.baseEndPoint}/aereopuertos/${id}`);
   }
 
 }

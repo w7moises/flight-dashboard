@@ -22,7 +22,7 @@ public class Pago {
     private Long payment_id;
 
     @OneToOne
-    private Reserva reservation_id;
+    private Reserva reservation;
 
     @Enumerated(EnumType.STRING)
     private Status status;
