@@ -10,23 +10,23 @@ export class PagoService {
 
   constructor(private http: HttpClient) { }
 
-  public getPagos() {
+  public getPayments() {
     return this.http.get(`${this.baseEndPoint}/pagos`);
   }
 
-  public getPago(id: number) {
+  public getPayment(id: number) {
     return this.http.get(`${this.baseEndPoint}/pagos/${id}`);
   }
 
-  public createPago(pago: Pago) {
+  public createPayment(pago: Pago) {
     return this.http.post(`${this.baseEndPoint}/pagos`, pago);
   }
 
-  public updatePago(id: number, pago: Pago) {
+  public updatePayment(id: number, pago: Pago) {
     return this.http.put(`${this.baseEndPoint}/pagos/${id}`, pago);
   }
 
-  public deletePago(id: number) {
+  public deletePayment(id: number) {
     return this.http.delete(`${this.baseEndPoint}/pagos/${id}`);
   }
 }

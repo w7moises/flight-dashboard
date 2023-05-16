@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pasarela',
@@ -9,8 +9,13 @@ import { Router } from '@angular/router';
 export class PasarelaComponent {
   @Input() paths: string[] = [];
   @Input() title: string = '';
+  id: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+  }
 
   public return() {
     this.router.navigate(['dashboard/pasajero']);

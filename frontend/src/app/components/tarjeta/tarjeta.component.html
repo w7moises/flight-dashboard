@@ -57,25 +57,18 @@
                                     <div class="tab-content">
                                         <div id="nav-tab-card" class="tab-pane fade show active" *ngIf="options==0">
                                             <p class="alert alert-success">Advertencia</p>
-                                            <form role="form">
+                                            <form role="form" [formGroup]="paymentForm">
                                                 <div class="form-group">
                                                     <label for="username">Nombre del titular</label>
                                                     <input type="text" name="username" placeholder="Ingresar nombre"
-                                                        required class="form-control">
+                                                        formControlName="name" required class="form-control">
                                                 </div>
-                                                <div class="form- mt-3">
+                                                <div class="form-group mt-3">
                                                     <label for="cardNumber">Número de tarjeta</label>
                                                     <div class="input-group">
-                                                        <input type="text" name="cardNumber"
+                                                        <input type="text" name="cardNumber" formControlName="number"
                                                             placeholder="Ingresar tarjeta" class="form-control"
                                                             required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text text-muted">
-                                                                <i class="fa fa-cc-visa mx-1"></i>
-                                                                <i class="fa fa-cc-amex mx-1"></i>
-                                                                <i class="fa fa-cc-mastercard mx-1"></i>
-                                                            </span>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -84,10 +77,12 @@
                                                             <label><span class="hidden-xs">Fecha de
                                                                     expiración</span></label>
                                                             <div class="input-group">
-                                                                <input type="number" placeholder="MM" name=""
-                                                                    class="form-control" required>
-                                                                <input type="number" placeholder="YY" name=""
-                                                                    class="form-control" required>
+                                                                <input type="number" placeholder="MM"
+                                                                    formControlName="month" class="form-control"
+                                                                    required>
+                                                                <input type="number" placeholder="YY"
+                                                                    formControlName="year" class="form-control"
+                                                                    required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -97,14 +92,17 @@
                                                                 title="Three-digits code on the back of your card">CVV
                                                                 <i class="fa fa-question-circle"></i>
                                                             </label>
-                                                            <input type="text" required class="form-control">
+                                                            <input type="text" maxlength="3" required
+                                                                formControlName="cvv" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="button"
-                                                    class="subscribe btn btn-primary btn-block rounded-pill shadow-sm mt-3"
-                                                    (click)="pay()">
-                                                    Confirmar </button>
+                                                <div class="form-group" style="text-align: center;">
+                                                    <button type="button"
+                                                        class="subscribe btn btn-primary btn-block rounded-pill shadow-sm mt-3"
+                                                        (click)="pay()">
+                                                        Confirmar </button>
+                                                </div>
                                             </form>
                                         </div>
                                         <div id="nav-tab-paypal" class="tab-pane fade show active" *ngIf="options==1">

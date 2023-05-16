@@ -24,7 +24,10 @@ import { CreatePasajeroComponent } from './views/register/create.pasajero/create
 import { CreateReservaComponent } from './views/register/create.reserva/create.reserva.component';
 import { CreateVueloComponent } from './views/register/create.vuelo/create.vuelo.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterPipe } from './pipe/filter.pipe';
+import { FilterPipePasajero } from './pipe/filter.pasajero.pipe';
+import { FilterPipeAereopuerto } from './pipe/filter.aereopuerto.pipe';
+import { FilterPipeAgente } from './pipe/filter.agente';
+import { FilterPipeReserva } from './pipe/filter.reserva';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { FilterPipe } from './pipe/filter.pipe';
     CreatePasajeroComponent,
     CreateReservaComponent,
     CreateVueloComponent,
-    FilterPipe
+    FilterPipePasajero,
+    FilterPipeAereopuerto,
+    FilterPipeAgente,
+    FilterPipeReserva
   ],
   imports: [
     BrowserModule,

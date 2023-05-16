@@ -11,6 +11,8 @@ import { Aereopuerto } from 'src/app/models/aereopuerto';
 import { AereopuertoService } from 'src/app/services/aereopuerto.service';
 import { Reserva } from 'src/app/models/reserva';
 import { ReservaService } from '../../services/reserva.service';
+import { Vuelo } from 'src/app/models/vuelo';
+import { VueloService } from 'src/app/services/vuelo.service';
 
 @Component({
   selector: 'app-table',
@@ -31,6 +33,8 @@ export class TableComponent {
   button: string = 'Editar';
   aereopuertoPage: Aereopuerto[] = [];
   aereopuertoFlag: boolean = false;
+  vueloPage: Vuelo[] = [];
+  vueloFlag: boolean = false;
   reservaPage: Reserva[] = [];
   reservaFlag: boolean = false;
   totalRegisters: number = 0;
@@ -42,7 +46,8 @@ export class TableComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private router: Router, private dialog: MatDialog, private pasajeroService: PasajeroService,
-    private agenteService: AgenteService, private aereopuertoService: AereopuertoService, private reservaService: ReservaService) { }
+    private agenteService: AgenteService, private aereopuertoService: AereopuertoService, private reservaService: ReservaService,
+    private vueloService: VueloService) { }
 
   ngOnInit(): void {
     this.calculateRange();
@@ -51,6 +56,9 @@ export class TableComponent {
     }
     if (this.data == 'supervisor') {
       this.agenteFlag = true;
+    }
+    if (this.data == 'supervisor/vuelos') {
+      this.vueloFlag = true;
     }
     if (this.data == 'supervisor/aereopuertos') {
       this.aereopuertoFlag = true;
@@ -95,6 +103,12 @@ export class TableComponent {
         this.agentePage = data.content as Agente[];
       });
     }
+    if (this.data == 'supervisor/vuelos') {
+      this.vueloService.getFlights(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
+        this.totalRegisters = data.totalElements as number;
+        this.vueloPage = data.content as Vuelo[];
+      });
+    }
     if (this.data == 'supervisor/aereopuertos') {
       this.aereopuertoService.getAirports(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
         this.totalRegisters = data.totalElements as number;
@@ -123,6 +137,9 @@ export class TableComponent {
     }
     if (this.data == 'supervisor') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.agent_id }]);
+    }
+    if (this.data == 'supervisor/vuelos') {
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.flight_id }]);
     }
     if (this.data == 'supervisor/aereopuertos') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.airport_id }]);

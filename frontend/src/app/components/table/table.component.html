@@ -59,7 +59,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let pasajero of pasajeroPage | filter:filterPost">
+              <tr class="gradeX footable-even" *ngFor="let pasajero of pasajeroPage | filterPasajero:filterPost">
                 <td class="footable-visible">
                   {{pasajero.passenger_id}}
                 </td>
@@ -112,7 +112,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let agente of agentePage | filter:filterPost">
+              <tr class="gradeX footable-even" *ngFor="let agente of agentePage | filterAgente:filterPost">
                 <td class="footable-visible">
                   {{agente.agent_id}}
                 </td>
@@ -155,7 +155,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let reserva of reservaPage | filter:filterPost">
+              <tr class="gradeX footable-even" *ngFor="let reserva of reservaPage | filterReserva:filterPost">
                 <td class="footable-visible">
                   {{reserva.reservation_id}}
                 </td>
@@ -190,6 +190,61 @@
             </tbody>
           </table>
           <table class="footable table table-stripped footable-loaded default mt-3" data-page-size="8"
+            data-filter="#filter" *ngIf="vueloFlag">
+            <thead>
+              <tr>
+                <th class="footable-visible footable-sortable footable-first-column">Id<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Aereolinea<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Avion<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Aereopuerto Origen<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Aereopuerto Destino<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Fecha de salida<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Fecha de llegada<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Acciones<span
+                    class="footable-sort-indicator"></span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="gradeX footable-even" *ngFor="let vuelo of vueloPage | filterAereopuerto:filterPost">
+                <td class="footable-visible">
+                  {{vuelo.flight_id}}
+                </td>
+                <td class="footable-visible">
+                  {{vuelo.airline.airline_name}}
+                </td>
+                <td class="footable-visible">
+                  {{vuelo.airplane.model}}
+                </td>
+                <td class="footable-visible">
+                  {{vuelo.origin_airport.airport_name}}
+                </td>
+                <td class="footable-visible">
+                  {{vuelo.destination_airport.airport_name}}
+                </td>
+                <td class="footable-visible">
+                  {{vuelo.departure_date}} : {{vuelo.departure_time}}
+                </td>
+                <td class="footable-visible">
+                  {{vuelo.arrival_date}} : {{vuelo.arrival_time}}
+                </td>
+                <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
+                    (click)="edit(vuelo)">
+                    &nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
+                  <button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
+                    (click)="delete(vuelo)">
+                    Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="footable table table-stripped footable-loaded default mt-3" data-page-size="8"
             data-filter="#filter" *ngIf="aereopuertoFlag">
             <thead>
               <tr>
@@ -206,7 +261,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let aereopuerto of aereopuertoPage | filter:filterPost">
+              <tr class="gradeX footable-even"
+                *ngFor="let aereopuerto of aereopuertoPage | filterAereopuerto:filterPost">
                 <td class="footable-visible">
                   {{aereopuerto.airport_id}}
                 </td>

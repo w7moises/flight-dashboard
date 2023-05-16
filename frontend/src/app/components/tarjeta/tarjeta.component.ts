@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PagoService } from '../../services/pago.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Pago } from 'src/app/models/pago';
 
 @Component({
   selector: 'app-tarjeta',
@@ -7,15 +10,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./tarjeta.component.scss']
 })
 export class TarjetaComponent {
-   options: number = 0;
+  options: number = 0;
+  paymentForm!: FormGroup;
+  @Input() id: number = 0;
 
-   constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute, private pagoService: PagoService) { }
 
-   public changeOption(option: number) {
-      this.options = option;
-   }
+  ngOnInit(): void {
+    this.paymentForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      number: new FormControl('', Validators.required),
+      cvv: new FormControl('', Validators.required),
+      month: new FormControl('', Validators.required),
+      year: new FormControl('', Validators.required),
+    });
+  }
 
-   pay (){
-     this.router.navigate(['/dashboard/pasajero']);
-   }
+  public changeOption(option: number) {
+    this.options = option;
+  }
+
+  pay() {
+    if (this.paymentForm.valid) {
+      var body = new Pago();
+      body.reservation_id = this.id;
+      body.payment_amount = 100;
+      this.pagoService.createPayment(body).subscribe((data: any) => {
+        this.router.navigate(['/dashboard/pasajero']);
+      });
+    }
+  }
 }
