@@ -1,26 +1,33 @@
 package com.app.backend.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "escalas")
 public class Escala {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long leg_id;
 
-    @Column(name = "flight_id", nullable = false)
-    private Long flight_id;
+    @ManyToOne
+    private Vuelo flight;
 
-    @Column(name = "origin_airport_id", nullable = false)
-    private Long origin_airport_id;
+    @OneToOne
+    private Aereopuerto origin_airport;
 
-    @Column(name = "destination_airport_id", nullable = false)
-    private Long destination_airport_id;
+    @OneToOne
+    private Aereopuerto destination_airport;
 
     @Column(name = "actual_departure_time", nullable = false)
     private Date actual_departure_time;

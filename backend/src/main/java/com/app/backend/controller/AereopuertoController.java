@@ -33,8 +33,8 @@ public class AereopuertoController {
     }
 
     @PostMapping
-    public ResponseEntity<AereopuertoDto> createAereopuerto(@RequestBody @Valid AereopuertoDto agentDto) {
-        AereopuertoDto aereopuerto = aereopuertoService.createAereopuerto(agentDto);
+    public ResponseEntity<AereopuertoDto> createAereopuerto(@RequestBody @Valid AereopuertoDto aereopuertoDto) {
+        AereopuertoDto aereopuerto = aereopuertoService.createAereopuerto(aereopuertoDto);
         return new ResponseEntity<>(aereopuerto, HttpStatus.CREATED);
     }
 
