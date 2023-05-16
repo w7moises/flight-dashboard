@@ -3,6 +3,7 @@ package com.app.backend.dto;
 import com.app.backend.model.Aereolinea;
 import com.app.backend.model.Aereopuerto;
 import com.app.backend.model.Avion;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,13 +29,13 @@ public class VueloDto {
 
     private Aereopuerto destination_airport;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date departure_date;
 
     @NotBlank(message = "departure_time is required")
     private String departure_time;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date arrival_date;
 
     @NotBlank(message = "arrival_time is required")

@@ -13,19 +13,19 @@ export class LoginComponent {
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
-  
+
   constructor(private router: Router, private loginService: LoginService) { }
 
   login() {
-    let route = '';
     if (this.loginForm.valid) {
       let user = {
         email: this.loginForm.get('email')?.value,
         password: this.loginForm.get('password')?.value,
       };
-      route = this.loginService.login(user.email!);
+      this.loginService.authenticate(user).subscribe((data: any) => {
+        this.loginService.handleToken(data.token, data.role, user.email!);
+      });
     }
-    console.log(this.loginForm.value);
-    this.router.navigate(['/dashboard/' + route]);
+    return;
   }
 }

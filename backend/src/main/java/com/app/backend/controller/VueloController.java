@@ -43,7 +43,7 @@ public class VueloController {
         return new ResponseEntity<>(vuelo, HttpStatus.CREATED);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/vuelos/{id}")
     public ResponseEntity<VueloDto> updateVuelo(@PathVariable Long id, @RequestBody @Valid CreateVueloDto createVueloDto) {
         VueloDto vuelo = vueloService.updateVuelo(id, createVueloDto);
         return new ResponseEntity<>(vuelo, HttpStatus.OK);

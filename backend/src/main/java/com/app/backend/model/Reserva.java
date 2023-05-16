@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -20,11 +21,11 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservation_id;
 
-    @Column(name = "agent_id", nullable = false)
-    private Long agent_id;
+    @ManyToOne
+    private Agente agent;
 
-    @Column(name = "flight_id", nullable = false)
-    private Long passenger_id;
+    @ManyToOne
+    private Pasajero passenger;
 
     @Enumerated(EnumType.STRING)
     private Status reservation_status_code;
@@ -36,8 +37,12 @@ public class Reserva {
     private Type travel_type_class;
 
     @Column(name = "reservation_date", nullable = false)
+    @CreationTimestamp
     private Date reservation_date;
 
     @Column(name = "number_in_party", nullable = false)
     private Long number_in_party;
+
+    @OneToOne
+    private Escala leg;
 }

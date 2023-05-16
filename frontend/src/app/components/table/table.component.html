@@ -22,8 +22,9 @@
         </div>
         <div class="ibox-content">
           <div class="row">
-            <div class="col-11">
-              <input type="text" class="form-control form-control-sm m-b-xs" id="filter" placeholder="Search in table">
+            <div class="col-11 form-group">
+              <input type="text" name="filterPost" [(ngModel)]="filterPost" class="form-control form-control-sm m-b-xs"
+                id="filter" placeholder="Search in table">
             </div>
             <div class="col d-flex justify-content-center">
               <button mat-mini-fab class="bg-secondary" (click)="create()" *ngIf="state">
@@ -58,7 +59,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let pasajero of pasajeroPage">
+              <tr class="gradeX footable-even" *ngFor="let pasajero of pasajeroPage | filter:filterPost">
                 <td class="footable-visible">
                   {{pasajero.passenger_id}}
                 </td>
@@ -111,7 +112,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let agente of agentePage">
+              <tr class="gradeX footable-even" *ngFor="let agente of agentePage | filter:filterPost">
                 <td class="footable-visible">
                   {{agente.agent_id}}
                 </td>
@@ -126,6 +127,63 @@
                     &nbsp;Editar&nbsp;&nbsp;&nbsp;</button>
                   <button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
                     (click)="delete(agente)">
+                    Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="footable table table-stripped footable-loaded default mt-3" data-page-size="8"
+            data-filter="#filter" *ngIf="reservaFlag">
+            <thead>
+              <tr>
+                <th class="footable-visible footable-sortable footable-first-column">Id<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Agente<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Pasajero<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Estatus<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Ticket<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Tipos de asiento<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Número de asientos<span
+                    class="footable-sort-indicator"></span></th>
+                <th class="footable-visible footable-sortable footable-first-column">Acciones<span
+                    class="footable-sort-indicator"></span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="gradeX footable-even" *ngFor="let reserva of reservaPage | filter:filterPost">
+                <td class="footable-visible">
+                  {{reserva.reservation_id}}
+                </td>
+                <td class="footable-visible">
+                  {{reserva.agent.agent_name}}
+                </td>
+                <td class="footable-visible">
+                  {{reserva.passenger.first_name | titlecase}} {{reserva.passenger.last_name | titlecase}}
+                </td>
+                <td class="footable-visible">
+                  {{reserva.reservation_status_code | titlecase}}
+                </td>
+                <td class="footable-visible">
+                  {{reserva.ticket_code}}
+                </td>
+                <td class="footable-visible">
+                  {{reserva.travel_type_class | titlecase}}
+                </td>
+                <td class="footable-visible">
+                  {{reserva.number_in_party}}
+                </td>
+                <td><button type="button"
+                    [disabled]="reserva.reservation_status_code=='CANCELADO' || reserva.reservation_status_code=='TERMINADO'"
+                    class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" (click)="edit(reserva)">
+                    &nbsp;{{button}}&nbsp;&nbsp;&nbsp;</button>
+                  <button type="button"
+                    [disabled]="reserva.reservation_status_code=='CANCELADO' || reserva.reservation_status_code=='TERMINADO'"
+                    class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" (click)="delete(reserva)">
                     Eliminar</button>
                 </td>
               </tr>
@@ -148,7 +206,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let aereopuerto of aereopuertoPage">
+              <tr class="gradeX footable-even" *ngFor="let aereopuerto of aereopuertoPage | filter:filterPost">
                 <td class="footable-visible">
                   {{aereopuerto.airport_id}}
                 </td>

@@ -1,5 +1,6 @@
 package com.app.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,9 +30,15 @@ public class Escala {
     @OneToOne
     private Aereopuerto destination_airport;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date actual_departure_date;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date actual_arrival_date;
+
     @Column(name = "actual_departure_time", nullable = false)
-    private Date actual_departure_time;
+    private String actual_departure_time;
 
     @Column(name = "actual_arrival_time", nullable = false)
-    private Date actual_arrival_time;
+    private String actual_arrival_time;
 }

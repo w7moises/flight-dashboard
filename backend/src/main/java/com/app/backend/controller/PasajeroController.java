@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/pasajeros")
@@ -23,6 +25,12 @@ public class PasajeroController {
     @GetMapping("/page")
     public ResponseEntity<Page<PasajeroDto>> getAllPasajeros(Pageable pageable) {
         Page<PasajeroDto> pasajeroList = pasajeroService.getAllPasajeros(pageable);
+        return new ResponseEntity<>(pasajeroList, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PasajeroDto>> getAllPasajeros() {
+        List<PasajeroDto> pasajeroList = pasajeroService.getAllPasajeros();
         return new ResponseEntity<>(pasajeroList, HttpStatus.OK);
     }
 

@@ -9,6 +9,8 @@ import { Agente } from 'src/app/models/agente';
 import { AgenteService } from 'src/app/services/agente.service';
 import { Aereopuerto } from 'src/app/models/aereopuerto';
 import { AereopuertoService } from 'src/app/services/aereopuerto.service';
+import { Reserva } from 'src/app/models/reserva';
+import { ReservaService } from '../../services/reserva.service';
 
 @Component({
   selector: 'app-table',
@@ -21,12 +23,16 @@ export class TableComponent {
   @Input() data: string = '';
   @Input() state: boolean = true;
   @Input() body: string[] = [];
+  filterPost = '';
   pasajeroPage: Pasajero[] = [];
   pasajeroFlag: boolean = false;
   agentePage: Agente[] = [];
   agenteFlag: boolean = false;
+  button: string = 'Editar';
   aereopuertoPage: Aereopuerto[] = [];
   aereopuertoFlag: boolean = false;
+  reservaPage: Reserva[] = [];
+  reservaFlag: boolean = false;
   totalRegisters: number = 0;
   flag: boolean = false;
   actualPage: number = 0;
@@ -36,7 +42,7 @@ export class TableComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private router: Router, private dialog: MatDialog, private pasajeroService: PasajeroService,
-    private agenteService: AgenteService, private aereopuertoService: AereopuertoService) { }
+    private agenteService: AgenteService, private aereopuertoService: AereopuertoService, private reservaService: ReservaService) { }
 
   ngOnInit(): void {
     this.calculateRange();
@@ -48,6 +54,13 @@ export class TableComponent {
     }
     if (this.data == 'supervisor/aereopuertos') {
       this.aereopuertoFlag = true;
+    }
+    if (this.data == 'agente') {
+      this.reservaFlag = true;
+    }
+    if (this.data == 'pasajero') {
+      this.button = 'Pagar';
+      this.reservaFlag = true;
     }
   }
 
@@ -62,6 +75,18 @@ export class TableComponent {
       this.pasajeroService.getPassengers(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
         this.totalRegisters = data.totalElements as number;
         this.pasajeroPage = data.content as Pasajero[];
+      });
+    }
+    if (this.data == 'agente') {
+      this.reservaService.getReservations(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
+        this.totalRegisters = data.totalElements as number;
+        this.reservaPage = data.content as Reserva[];
+      });
+    }
+    if (this.data == 'pasajero') {
+      this.reservaService.getReservations(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
+        this.totalRegisters = data.totalElements as number;
+        this.reservaPage = data.content as Reserva[];
       });
     }
     if (this.data == 'supervisor') {
@@ -89,6 +114,12 @@ export class TableComponent {
   public edit(body: any) {
     if (this.data == 'agente/pasajero') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.passenger_id }]);
+    }
+    if (this.data == 'agente') {
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.reservation_id }]);
+    }
+    if (this.data == 'pasajero') {
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.reservation_id }]);
     }
     if (this.data == 'supervisor') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.agent_id }]);

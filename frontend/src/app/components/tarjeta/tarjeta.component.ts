@@ -13,7 +13,6 @@ export class TarjetaComponent {
 
    public changeOption(option: number) {
       this.options = option;
-      console.log(this.options);
    }
 
    pay (){

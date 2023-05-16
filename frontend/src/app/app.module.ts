@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { TableComponent } from './components/table/table.component';
 import { TopnavbarComponent } from './components/topnavbar/topnavbar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardPasajeroComponent } from './views/dashboard.pasajero/dashboard.pasajero.component';
 import { AngularMaterialModule } from './modules/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +24,7 @@ import { CreatePasajeroComponent } from './views/register/create.pasajero/create
 import { CreateReservaComponent } from './views/register/create.reserva/create.reserva.component';
 import { CreateVueloComponent } from './views/register/create.vuelo/create.vuelo.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -44,8 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     CreateAgenteComponent,
     CreatePasajeroComponent,
     CreateReservaComponent,
-    CreateVueloComponent
-
+    CreateVueloComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -54,6 +55,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

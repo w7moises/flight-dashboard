@@ -24,7 +24,6 @@ export class CreateAgenteComponent {
     });
     if (this.id != 0) {
       this.title = 'Editar';
-      console.log(this.id);
       this.service.getAgentById(this.id).subscribe((data: any) => {
         this.agentForm.get('agent_name')?.setValue(data.agent_name);
         this.agentForm.get('agent_details')?.setValue(data.agent_details);

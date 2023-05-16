@@ -1,9 +1,13 @@
+import { Aereolinea } from "./aereolinea";
+import { Aereopuerto } from "./aereopuerto";
+import { Avion } from "./avion";
+
 export class Vuelo {
     flight_id!: number;
-    airline_id!: number;
-    aircraft_id!: number;
-    origin_airport_id!: number;
-    destination_airport_id!: number;
+    airline!: Aereolinea;
+    aircraft!: Avion;
+    origin_airport!: Aereopuerto;
+    destination_airport!: Aereopuerto;
     departure_time!: string;
     arrival_time!: string;
 }

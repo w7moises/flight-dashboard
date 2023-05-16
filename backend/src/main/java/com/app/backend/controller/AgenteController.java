@@ -33,14 +33,14 @@ public class AgenteController {
     }
 
     @PostMapping
-    public ResponseEntity<AgenteDto> createAgente(@RequestBody @Valid AgenteDto agentDto) {
-        AgenteDto agente = agenteService.createAgente(agentDto);
+    public ResponseEntity<AgenteDto> createAgente(@RequestBody @Valid AgenteDto agenteDto) {
+        AgenteDto agente = agenteService.createAgente(agenteDto);
         return new ResponseEntity<>(agente, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AgenteDto> updateAgente(@PathVariable Long id, @RequestBody @Valid AgenteDto agentDto) {
-        AgenteDto agente = agenteService.updateAgente(id, agentDto);
+    public ResponseEntity<AgenteDto> updateAgente(@PathVariable Long id, @RequestBody @Valid AgenteDto agenteDto) {
+        AgenteDto agente = agenteService.updateAgente(id, agenteDto);
         return new ResponseEntity<>(agente, HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package com.app.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,12 +34,14 @@ public class Vuelo {
     private Aereopuerto destination_airport;
 
     @Column(name = "departure_date", nullable = false)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date departure_date;
 
     @Column(name = "departure_time", nullable = false)
     private String departure_time;
 
     @Column(name = "arrival_date", nullable = false)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date arrival_date;
 
     @Column(name = "arrival_time", nullable = false)
