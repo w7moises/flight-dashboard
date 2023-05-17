@@ -15,28 +15,28 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PasajeroDto {
 
-    private Long passenger_id;
+    private Long passengerId;
 
     @NotBlank(message = "First name is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "First name must be alphabetic")
-    private String first_name;
+    private String firstName;
 
     @NotBlank(message = "Second name is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Second name must be alphabetic")
-    private String second_name;
+    private String secondName;
 
     @NotBlank(message = "Last name is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Last name must be alphabetic")
-    private String last_name;
+    private String lastName;
 
     @NotBlank(message = "Phone number is required")
     @Size(min = 9, max = 9, message = "Phone number must be 9 digits")
     @Pattern(regexp = "^\\d*$", message = "Phone number must be numeric")
-    private String phone_number;
+    private String phoneNumber;
 
     @NotBlank(message = "Email address is required")
     @Email
-    private String email_address;
+    private String emailAddress;
 
     @NotBlank(message = "Address is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Address must be alphabetic")
@@ -47,5 +47,5 @@ public class PasajeroDto {
     private String country;
 
     @NotBlank(message = "Other details are required")
-    private String other_details;
+    private String otherDetails;
 }

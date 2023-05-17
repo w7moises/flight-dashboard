@@ -16,11 +16,12 @@ public class Agente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long agent_id;
+    @Column(name = "agent_id", nullable = false)
+    private Long agentId;
 
     @Column(name = "agent_name", nullable = false, length = 50)
-    private String agent_name;
+    private String agentName;
 
     @Column(name = "agent_details", nullable = false)
-    private String agent_details;
+    private String agentDetails;
 }

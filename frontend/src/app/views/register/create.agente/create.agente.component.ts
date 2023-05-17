@@ -25,8 +25,8 @@ export class CreateAgenteComponent {
     if (this.id != 0) {
       this.title = 'Editar';
       this.service.getAgentById(this.id).subscribe((data: any) => {
-        this.agentForm.get('agent_name')?.setValue(data.agent_name);
-        this.agentForm.get('agent_details')?.setValue(data.agent_details);
+        this.agentForm.get('agent_name')?.setValue(data.agentName);
+        this.agentForm.get('agent_details')?.setValue(data.agentDetails);
       });
     }
   }
@@ -35,11 +35,11 @@ export class CreateAgenteComponent {
     if (this.agentForm.valid) {
       var body = new Agente();
       var updateBody = new Agente();
-      body.agent_name = this.agentForm.get('agent_name')?.value;
-      body.agent_details = this.agentForm.get('agent_details')?.value;
+      body.agentName = this.agentForm.get('agent_name')?.value;
+      body.agentDetails = this.agentForm.get('agent_details')?.value;
       if (this.id != 0) {
-        updateBody.agent_name = this.agentForm.get('agent_name')?.value;
-        updateBody.agent_details = this.agentForm.get('agent_details')?.value;
+        updateBody.agentName = this.agentForm.get('agent_name')?.value;
+        updateBody.agentDetails = this.agentForm.get('agent_details')?.value;
         this.service.updateAgent(this.id, updateBody).subscribe((data: any) => { this.redirectTo('dashboard/supervisor'); });
       } else {
         this.service.createAgent(body).subscribe((data: any) => {

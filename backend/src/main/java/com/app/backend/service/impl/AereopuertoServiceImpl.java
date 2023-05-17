@@ -46,9 +46,9 @@ public class AereopuertoServiceImpl implements AereopuertoService {
         Aereopuerto optionalAereopuerto = aereopuertoRepository.findById(aereopuertoId).orElseThrow(
                 () -> new ResourceNotFoundException("Aereopuerto", "id", aereopuertoId)
         );
-        optionalAereopuerto.setAirport_name(aereopuertoDto.getAirport_name());
-        optionalAereopuerto.setAirport_location(aereopuertoDto.getAirport_location());
-        optionalAereopuerto.setOther_details(aereopuertoDto.getOther_details());
+        optionalAereopuerto.setAirportName(aereopuertoDto.getAirportName());
+        optionalAereopuerto.setAirportLocation(aereopuertoDto.getAirportLocation());
+        optionalAereopuerto.setOtherDetails(aereopuertoDto.getOtherDetails());
         return modelMapper.map(aereopuertoRepository.save(optionalAereopuerto), AereopuertoDto.class);
     }
 

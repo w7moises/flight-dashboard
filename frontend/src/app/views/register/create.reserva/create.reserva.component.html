@@ -45,8 +45,8 @@
                                                 <mat-label>Nombre del pasajero</mat-label>
                                                 <mat-select formControlName="passenger_id">
                                                     <mat-option *ngFor="let pasajero of passengers"
-                                                        [value]="pasajero.passenger_id">
-                                                        {{pasajero.first_name | titlecase}} {{pasajero.last_name | titlecase}}
+                                                        [value]="pasajero.passengerId">
+                                                        {{pasajero.firstName | titlecase}} {{pasajero.lastName | titlecase}}
                                                     </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -67,9 +67,9 @@
                                                 <mat-select formControlName="leg_id">
                                                     <mat-option *ngFor="let leg of legs" [value]="leg.leg_id">
                                                         <div style="border-bottom: 1px solid #aaa;">
-                                                            <p>{{leg.origin_airport.airport_name}}-{{leg.actual_departure_date}}:{{leg.actual_departure_time}}
+                                                            <p>{{leg.origin_airport.airportName}}-{{leg.actual_departure_date}}:{{leg.actual_departure_time}}
                                                             </p>
-                                                            <p>{{leg.destination_airport.airport_name}}-{{leg.actual_arrival_date}}:{{leg.actual_arrival_time}}
+                                                            <p>{{leg.destination_airport.airportName}}-{{leg.actual_arrival_date}}:{{leg.actual_arrival_time}}
                                                             </p>
                                                         </div>
                                                     </mat-option>

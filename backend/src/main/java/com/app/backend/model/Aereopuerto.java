@@ -16,14 +16,14 @@ public class Aereopuerto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long airport_id;
+    private Long airportId;
 
     @Column(name = "airport_name", nullable = false)
-    private String airport_name;
+    private String airportName;
 
     @Column(name = "airport_location", nullable = false)
-    private String airport_location;
+    private String airportLocation;
 
     @Column(name = "other_details", nullable = false)
-    private String other_details;
+    private String otherDetails;
 }

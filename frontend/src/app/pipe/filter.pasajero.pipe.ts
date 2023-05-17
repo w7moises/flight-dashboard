@@ -8,7 +8,7 @@ export class FilterPipePasajero implements PipeTransform {
         if (arg === '' || arg.length < 3) return value;
         const resultPosts = [];
         for (const post of value) {
-            if (post.last_name.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
+            if (post.lastName.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
                 resultPosts.push(post);
             }
         };

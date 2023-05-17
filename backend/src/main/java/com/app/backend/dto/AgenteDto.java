@@ -13,12 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AgenteDto {
 
-    private Long agent_id;
+    private Long agentId;
 
     @NotBlank(message = "Agent name is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Agent name must be alphabetic")
-    private String agent_name;
+    private String agentName;
 
     @NotBlank(message = "Agent details are required")
-    private String agent_details;
+    private String agentDetails;
 }

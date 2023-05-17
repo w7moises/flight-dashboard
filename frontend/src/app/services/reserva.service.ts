@@ -34,6 +34,13 @@ export class ReservaService {
     return this.http.get<Reserva>(`${this.baseEndPoint}/reservas/${id}`, { headers: corsHeaders });
   }
 
+  public getReservationsByEmail(email: string): Observable<any> {
+    let corsHeaders = new HttpHeaders({
+      Authorization: this.token,
+    });
+    return this.http.get<any>(`${this.baseEndPoint}/reservas/email/${email}`, { headers: corsHeaders });
+  }
+
   public createReservation(reserva: CreateReserva): Observable<Reserva> {
     let corsHeaders = new HttpHeaders({
       Authorization: this.token,

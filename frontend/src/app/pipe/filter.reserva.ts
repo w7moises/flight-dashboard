@@ -8,7 +8,7 @@ export class FilterPipeReserva implements PipeTransform {
         if (arg === '' || arg.length < 3) return value;
         const resultPosts = [];
         for (const post of value) {
-            if (post.reservation_status_code.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
+            if (post.reservationStatusCode.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
                 resultPosts.push(post);
             }
         };

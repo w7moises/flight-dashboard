@@ -61,22 +61,22 @@
             <tbody>
               <tr class="gradeX footable-even" *ngFor="let pasajero of pasajeroPage | filterPasajero:filterPost">
                 <td class="footable-visible">
-                  {{pasajero.passenger_id}}
+                  {{pasajero.passengerId}}
                 </td>
                 <td class="footable-visible">
-                  {{pasajero.first_name}}
+                  {{pasajero.firstName}}
                 </td>
                 <td class="footable-visible">
-                  {{pasajero.second_name}}
+                  {{pasajero.secondName}}
                 </td>
                 <td class="footable-visible">
-                  {{pasajero.last_name}}
+                  {{pasajero.lastName}}
                 </td>
                 <td class="footable-visible">
-                  {{pasajero.phone_number}}
+                  {{pasajero.phoneNumber}}
                 </td>
                 <td class="footable-visible">
-                  {{pasajero.email_address}}
+                  {{pasajero.emailAddress}}
                 </td>
                 <td class="footable-visible">
                   {{pasajero.city}}
@@ -85,7 +85,7 @@
                   {{pasajero.country}}
                 </td>
                 <td class="footable-visible">
-                  {{pasajero.other_details}}
+                  {{pasajero.otherDetails}}
                 </td>
                 <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
                     (click)="edit(pasajero)">
@@ -114,13 +114,13 @@
             <tbody>
               <tr class="gradeX footable-even" *ngFor="let agente of agentePage | filterAgente:filterPost">
                 <td class="footable-visible">
-                  {{agente.agent_id}}
+                  {{agente.agentId}}
                 </td>
                 <td class="footable-visible">
-                  {{agente.agent_name}}
+                  {{agente.agentName}}
                 </td>
                 <td class="footable-visible">
-                  {{agente.agent_details}}
+                  {{agente.agentDetails}}
                 </td>
                 <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
                     (click)="edit(agente)">
@@ -157,25 +157,25 @@
             <tbody>
               <tr class="gradeX footable-even" *ngFor="let reserva of reservaPage | filterReserva:filterPost">
                 <td class="footable-visible">
-                  {{reserva.reservation_id}}
+                  {{reserva.reservationId}}
                 </td>
                 <td class="footable-visible">
-                  {{reserva.agent.agent_name}}
+                  {{reserva.agent.agentName}}
                 </td>
                 <td class="footable-visible">
-                  {{reserva.passenger.first_name | titlecase}} {{reserva.passenger.last_name | titlecase}}
+                  {{reserva.passenger.firstName | titlecase}} {{reserva.passenger.lastName | titlecase}}
                 </td>
                 <td class="footable-visible">
-                  {{reserva.reservation_status_code | titlecase}}
+                  {{reserva.reservationStatusCode | titlecase}}
                 </td>
                 <td class="footable-visible">
-                  {{reserva.ticket_code}}
+                  {{reserva.ticketCode}}
                 </td>
                 <td class="footable-visible">
-                  {{reserva.travel_type_class | titlecase}}
+                  {{reserva.travelTypeClass | titlecase}}
                 </td>
                 <td class="footable-visible">
-                  {{reserva.number_in_party}}
+                  {{reserva.numberInParty}}
                 </td>
                 <td><button type="button"
                     [disabled]="reserva.reservation_status_code=='CANCELADO' || reserva.reservation_status_code=='TERMINADO'"
@@ -264,16 +264,16 @@
               <tr class="gradeX footable-even"
                 *ngFor="let aereopuerto of aereopuertoPage | filterAereopuerto:filterPost">
                 <td class="footable-visible">
-                  {{aereopuerto.airport_id}}
+                  {{aereopuerto.airportId}}
                 </td>
                 <td class="footable-visible">
-                  {{aereopuerto.airport_name}}
+                  {{aereopuerto.airportName}}
                 </td>
                 <td class="footable-visible">
-                  {{aereopuerto.airport_location}}
+                  {{aereopuerto.airportLocation}}
                 </td>
                 <td class="footable-visible">
-                  {{aereopuerto.other_details}}
+                  {{aereopuerto.otherDetails}}
                 </td>
                 <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
                     (click)="edit(aereopuerto)">

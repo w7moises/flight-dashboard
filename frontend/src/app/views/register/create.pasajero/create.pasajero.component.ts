@@ -32,14 +32,14 @@ export class CreatePasajeroComponent {
     if (this.id != 0) {
       this.title = 'Editar';
       this.service.getPassengerById(this.id).subscribe((data: any) => {
-        this.passengerForm.get('first_name')?.setValue(data.first_name);
-        this.passengerForm.get('second_name')?.setValue(data.second_name);
-        this.passengerForm.get('last_name')?.setValue(data.last_name);
-        this.passengerForm.get('phone_number')?.setValue(data.phone_number);
-        this.passengerForm.get('email_address')?.setValue(data.email_address);
+        this.passengerForm.get('first_name')?.setValue(data.firstName);
+        this.passengerForm.get('second_name')?.setValue(data.secondName);
+        this.passengerForm.get('last_name')?.setValue(data.lastName);
+        this.passengerForm.get('phone_number')?.setValue(data.phoneNumber);
+        this.passengerForm.get('email_address')?.setValue(data.emailAddress);
         this.passengerForm.get('city')?.setValue(data.city);
         this.passengerForm.get('country')?.setValue(data.country);
-        this.passengerForm.get('other_details')?.setValue(data.other_details);
+        this.passengerForm.get('other_details')?.setValue(data.otherDetails);
       });
     }
   }
@@ -48,24 +48,24 @@ export class CreatePasajeroComponent {
     if (this.passengerForm.valid) {
       var body = new Pasajero();
       var updateBody = new Pasajero();
-      body.first_name = this.passengerForm.get('first_name')?.value;
-      body.second_name = this.passengerForm.get('second_name')?.value;
-      body.last_name = this.passengerForm.get('last_name')?.value;
-      body.phone_number = this.passengerForm.get('phone_number')?.value;
-      body.email_address = this.passengerForm.get('email_address')?.value;
+      body.firstName = this.passengerForm.get('first_name')?.value;
+      body.secondName = this.passengerForm.get('second_name')?.value;
+      body.lastName = this.passengerForm.get('last_name')?.value;
+      body.phoneNumber = this.passengerForm.get('phone_number')?.value;
+      body.emailAddress = this.passengerForm.get('email_address')?.value;
       body.city = this.passengerForm.get('city')?.value;
       body.country = this.passengerForm.get('country')?.value;
-      body.other_details = this.passengerForm.get('other_details')?.value;
+      body.otherDetails = this.passengerForm.get('other_details')?.value;
 
       if (this.id != 0) {
-        updateBody.first_name = this.passengerForm.get('first_name')?.value;
-        updateBody.second_name = this.passengerForm.get('second_name')?.value;
-        updateBody.last_name = this.passengerForm.get('last_name')?.value;
-        updateBody.phone_number = this.passengerForm.get('phone_number')?.value;
-        updateBody.email_address = this.passengerForm.get('email_address')?.value;
+        updateBody.firstName = this.passengerForm.get('first_name')?.value;
+        updateBody.secondName = this.passengerForm.get('second_name')?.value;
+        updateBody.lastName = this.passengerForm.get('last_name')?.value;
+        updateBody.phoneNumber = this.passengerForm.get('phone_number')?.value;
+        updateBody.emailAddress = this.passengerForm.get('email_address')?.value;
         updateBody.city = this.passengerForm.get('city')?.value;
         updateBody.country = this.passengerForm.get('country')?.value;
-        updateBody.other_details = this.passengerForm.get('other_details')?.value;
+        updateBody.otherDetails = this.passengerForm.get('other_details')?.value;
         this.service.updatePassenger(this.id, updateBody).subscribe((data: any) => { this.redirectTo('dashboard/agente/pasajero'); });
       } else {
         this.service.createPassenger(body).subscribe((data: any) => { this.redirectTo('dashboard/agente/pasajero'); });

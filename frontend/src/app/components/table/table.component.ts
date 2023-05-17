@@ -13,6 +13,7 @@ import { Reserva } from 'src/app/models/reserva';
 import { ReservaService } from '../../services/reserva.service';
 import { Vuelo } from 'src/app/models/vuelo';
 import { VueloService } from 'src/app/services/vuelo.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-table',
@@ -42,14 +43,16 @@ export class TableComponent {
   actualPage: number = 0;
   totalPage: number = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  email: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private router: Router, private dialog: MatDialog, private pasajeroService: PasajeroService,
     private agenteService: AgenteService, private aereopuertoService: AereopuertoService, private reservaService: ReservaService,
-    private vueloService: VueloService) { }
+    private vueloService: VueloService, private loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.email = this.loginService.getEmail()!;
     this.calculateRange();
     if (this.data == 'agente/pasajero') {
       this.pasajeroFlag = true;
@@ -92,9 +95,9 @@ export class TableComponent {
       });
     }
     if (this.data == 'pasajero') {
-      this.reservaService.getReservations(this.actualPage.toString(), this.totalPage.toString()).subscribe((data: any) => {
+      this.reservaService.getReservationsByEmail(this.email).subscribe((data: any) => {
         this.totalRegisters = data.totalElements as number;
-        this.reservaPage = data.content as Reserva[];
+        this.reservaPage = data as Reserva[];
       });
     }
     if (this.data == 'supervisor') {
@@ -127,22 +130,22 @@ export class TableComponent {
 
   public edit(body: any) {
     if (this.data == 'agente/pasajero') {
-      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.passenger_id }]);
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.passengerId }]);
     }
     if (this.data == 'agente') {
-      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.reservation_id }]);
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.reservationId }]);
     }
     if (this.data == 'pasajero') {
-      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.reservation_id }]);
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.reservationId }]);
     }
     if (this.data == 'supervisor') {
-      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.agent_id }]);
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.agentId }]);
     }
     if (this.data == 'supervisor/vuelos') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.flight_id }]);
     }
     if (this.data == 'supervisor/aereopuertos') {
-      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.airport_id }]);
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.airportId }]);
     }
   }
 

@@ -12,14 +12,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AereopuertoDto {
 
-    private Long airport_id;
+    private Long airportId;
 
     @NotBlank(message = "El nombre del aeropuerto es requerido")
-    private String airport_name;
+    private String airportName;
 
     @NotBlank(message = "La ubicación del aeropuerto es requerida")
-    private String airport_location;
+    private String airportLocation;
 
     @NotBlank(message = "Los detalles del aeropuerto son requeridos")
-    private String other_details;
+    private String otherDetails;
 }

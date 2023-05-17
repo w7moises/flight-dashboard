@@ -46,8 +46,8 @@ public class AgenteServiceImpl implements AgenteService {
         Agente optionalAgente = agenteRepository.findById(agenteId).orElseThrow(
                 () -> new ResourceNotFoundException("Agente", "id", agenteId)
         );
-        optionalAgente.setAgent_name(agenteDto.getAgent_name());
-        optionalAgente.setAgent_details(agenteDto.getAgent_details());
+        optionalAgente.setAgentName(agenteDto.getAgentName());
+        optionalAgente.setAgentDetails(agenteDto.getAgentDetails());
         return modelMapper.map(agenteRepository.save(optionalAgente), AgenteDto.class);
     }
 

@@ -19,6 +19,7 @@ public class Escala {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "leg_id", nullable = false)
     private Long leg_id;
 
     @ManyToOne

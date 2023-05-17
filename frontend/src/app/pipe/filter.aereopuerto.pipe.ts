@@ -8,7 +8,7 @@ export class FilterPipeAereopuerto implements PipeTransform {
         if (arg === '' || arg.length < 3) return value;
         const resultPosts = [];
         for (const post of value) {
-            if (post.airport_name.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
+            if (post.airportName.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
                 resultPosts.push(post);
             };
         };

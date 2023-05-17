@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/reservas")
@@ -24,6 +26,12 @@ public class ReservaController {
     @GetMapping("/page")
     public ResponseEntity<Page<ReservaDto>> getAllReservas(Pageable pageable) {
         Page<ReservaDto> reservaList = reservaService.getAllReservas(pageable);
+        return new ResponseEntity<>(reservaList, HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<List<ReservaDto>> getAllReservas(@PathVariable String email) {
+        List<ReservaDto> reservaList = reservaService.getAllReservasByEmail(email);
         return new ResponseEntity<>(reservaList, HttpStatus.OK);
     }
 

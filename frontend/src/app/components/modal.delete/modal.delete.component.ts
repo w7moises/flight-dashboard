@@ -19,16 +19,16 @@ export class ModalDeleteComponent {
     private reservationService: ReservaService, private vueloService: VueloService) { }
 
   onClick(): void {
-    if (this.data.hasOwnProperty('passenger_id')) {
-      this.pasajeroService.deletePassenger(this.data.passenger_id).subscribe((data: any) => { this.dialogRef.close() });
+    if (this.data.hasOwnProperty('passengerId')) {
+      this.pasajeroService.deletePassenger(this.data.passengerId).subscribe((data: any) => { this.dialogRef.close() });
     }
-    if (this.data.hasOwnProperty('agent_id')) {
-      this.agenteService.deleteAgent(this.data.agent_id).subscribe((data: any) => { this.dialogRef.close() });
+    if (this.data.hasOwnProperty('agentId')) {
+      this.agenteService.deleteAgent(this.data.agentId).subscribe((data: any) => { this.dialogRef.close() });
     }
-    if (this.data.hasOwnProperty('airport_id')) {
-      this.aereopuertoService.deleteAirport(this.data.airport_id).subscribe((data: any) => { this.dialogRef.close() });
+    if (this.data.hasOwnProperty('airportId')) {
+      this.aereopuertoService.deleteAirport(this.data.airportId).subscribe((data: any) => { this.dialogRef.close() });
     }
-    if (this.data.hasOwnProperty('reservation_id')) {
+    if (this.data.hasOwnProperty('reservationId')) {
       this.reservationService.deleteReservation(this.data.reservation_id).subscribe((data: any) => { this.dialogRef.close() });
     }
     if (this.data.hasOwnProperty('flight_id')) {

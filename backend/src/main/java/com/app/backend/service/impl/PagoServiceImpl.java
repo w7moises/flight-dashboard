@@ -41,7 +41,7 @@ public class PagoServiceImpl implements PagoService {
         Reserva reserva = reservaRepository.findById(createPagoDto.getReservation_id()).orElseThrow(
                 () -> new ResourceNotFoundException("Reserva", "id", createPagoDto.getReservation_id())
         );
-        reserva.setReservation_status_code(Status.TERMINADO);
+        reserva.setReservationStatusCode(Status.TERMINADO);
         Pago pago = new Pago();
         pago.setReservation(reserva);
         pago.setStatus(Status.TERMINADO);

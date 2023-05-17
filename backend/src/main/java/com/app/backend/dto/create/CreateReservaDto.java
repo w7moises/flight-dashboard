@@ -13,13 +13,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CreateReservaDto {
 
-    private Long agent_id;
+    private Long agentId;
 
-    private Long passenger_id;
+    private Long passengerId;
 
-    private Type travel_type_class;
+    private Type travelTypeClass;
 
-    private Long number_in_party;
+    private Long numberInParty;
 
     private Long leg_id;
 }

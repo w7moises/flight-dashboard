@@ -26,9 +26,9 @@ export class CreateAereopuertoComponent {
     if (this.id != 0) {
       this.title = 'Editar';
       this.aerepuertoService.getAirportById(this.id).subscribe((data: any) => {
-        this.airportForm.get('airport_name')?.setValue(data.airport_name);
-        this.airportForm.get('airport_location')?.setValue(data.airport_location);
-        this.airportForm.get('other_details')?.setValue(data.other_details);
+        this.airportForm.get('airport_name')?.setValue(data.airportName);
+        this.airportForm.get('airport_location')?.setValue(data.airportLocation);
+        this.airportForm.get('other_details')?.setValue(data.otherDetails);
       });
     }
   }
@@ -37,13 +37,13 @@ export class CreateAereopuertoComponent {
     if (this.airportForm.valid) {
       var body = new Aereopuerto();
       var updateBody = new Aereopuerto();
-      body.airport_name = this.airportForm.get('airport_name')?.value;
-      body.airport_location = this.airportForm.get('airport_location')?.value;
-      body.other_details = this.airportForm.get('other_details')?.value;
+      body.airportName = this.airportForm.get('airport_name')?.value;
+      body.airportLocation = this.airportForm.get('airport_location')?.value;
+      body.otherDetails = this.airportForm.get('other_details')?.value;
       if (this.id != 0) {
-        updateBody.airport_name = this.airportForm.get('airport_name')?.value;
-        updateBody.airport_location = this.airportForm.get('airport_location')?.value;
-        updateBody.other_details = this.airportForm.get('other_details')?.value;
+        updateBody.airportName = this.airportForm.get('airport_name')?.value;
+        updateBody.airportLocation = this.airportForm.get('airport_location')?.value;
+        updateBody.otherDetails = this.airportForm.get('other_details')?.value;
         this.aerepuertoService.updateAirport(this.id, updateBody).subscribe((data: any) => { this.redirectTo('dashboard/supervisor/aereopuertos'); });
       } else {
         this.aerepuertoService.createAirport(body).subscribe((data: any) => { this.redirectTo('dashboard/supervisor/aereopuertos'); });

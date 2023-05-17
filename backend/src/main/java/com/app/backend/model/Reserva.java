@@ -19,7 +19,8 @@ public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservation_id;
+    @Column(name = "reservation_id", nullable = false)
+    private Long reservationId;
 
     @ManyToOne
     private Agente agent;
@@ -28,20 +29,22 @@ public class Reserva {
     private Pasajero passenger;
 
     @Enumerated(EnumType.STRING)
-    private Status reservation_status_code;
+    @Column(name = "reservation_status_code", nullable = false)
+    private Status reservationStatusCode;
 
     @Column(name = "ticket_code", nullable = false, length = 6)
-    private String ticket_code;
+    private String ticketCode;
 
     @Enumerated(EnumType.STRING)
-    private Type travel_type_class;
+    @Column(name = "travel_type_class", nullable = false)
+    private Type travelTypeClass;
 
     @Column(name = "reservation_date", nullable = false)
     @CreationTimestamp
-    private Date reservation_date;
+    private Date reservationDate;
 
     @Column(name = "number_in_party", nullable = false)
-    private Long number_in_party;
+    private Long numberInParty;
 
     @OneToOne
     private Escala leg;

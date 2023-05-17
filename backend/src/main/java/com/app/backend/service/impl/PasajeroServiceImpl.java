@@ -50,10 +50,10 @@ public class PasajeroServiceImpl implements PasajeroService {
     public PasajeroDto createPasajero(PasajeroDto pasajeroDto) {
         Pasajero pasajero = pasajeroRepository.save(modelMapper.map(pasajeroDto, Pasajero.class));
         UserDto userDto = new UserDto();
-        userDto.setEmail(pasajero.getEmail_address());
-        userDto.setFirstName(pasajero.getFirst_name());
-        userDto.setLastName(pasajero.getLast_name());
-        userDto.setPassword(pasajero.getEmail_address());
+        userDto.setEmail(pasajero.getEmailAddress());
+        userDto.setFirstName(pasajero.getFirstName());
+        userDto.setLastName(pasajero.getLastName());
+        userDto.setPassword(pasajero.getEmailAddress());
         authenticationServiceImpl.register(userDto, Role.ROLE_PASSENGER);
         return modelMapper.map(pasajero, PasajeroDto.class);
     }
@@ -63,14 +63,14 @@ public class PasajeroServiceImpl implements PasajeroService {
         Pasajero optionalPasajero = pasajeroRepository.findById(pasajeroId).orElseThrow(
                 () -> new ResourceNotFoundException("Pasajero", "id", pasajeroId)
         );
-        optionalPasajero.setFirst_name(pasajeroDto.getFirst_name());
-        optionalPasajero.setSecond_name(pasajeroDto.getSecond_name());
-        optionalPasajero.setLast_name(pasajeroDto.getLast_name());
-        optionalPasajero.setPhone_number(pasajeroDto.getPhone_number());
-        optionalPasajero.setEmail_address(pasajeroDto.getEmail_address());
+        optionalPasajero.setFirstName(pasajeroDto.getFirstName());
+        optionalPasajero.setSecondName(pasajeroDto.getSecondName());
+        optionalPasajero.setLastName(pasajeroDto.getLastName());
+        optionalPasajero.setPhoneNumber(pasajeroDto.getPhoneNumber());
+        optionalPasajero.setEmailAddress(pasajeroDto.getEmailAddress());
         optionalPasajero.setCity(pasajeroDto.getCity());
         optionalPasajero.setCountry(pasajeroDto.getCountry());
-        optionalPasajero.setOther_details(pasajeroDto.getOther_details());
+        optionalPasajero.setOtherDetails(pasajeroDto.getOtherDetails());
         return modelMapper.map(pasajeroRepository.save(optionalPasajero), PasajeroDto.class);
     }
 
