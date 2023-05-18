@@ -358,9 +358,95 @@
                         </mat-step>
                         <mat-step>
                             <ng-template matStepLabel>Done</ng-template>
+                            <div class="col-lg-4 mt-3">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <h5>Vuelo</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <small class="stats-label">Aereolinea</small>
+                                                <h4>{{flight.airline.airlineName}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Avion</small>
+                                                <h4>{{flight.airplane.model}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Fecha incial</small>
+                                                <h4>{{flight.departureDate}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Fecha final</small>
+                                                <h4>{{flight.arrivalDate}}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-3">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <h5>Escalas</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="row" *ngFor="let escala of legs">
+                                            <div class="col-4">
+                                                <small class="stats-label">Id</small>
+                                                <h4>{{escala.legId}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Aereopuerto Origen</small>
+                                                <h4>{{escala.origin_airport.airportName}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Aereopuerto Destino</small>
+                                                <h4>{{escala.destination_airport.airportName}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Fecha de salida</small>
+                                                <h4>{{escala.actualDepartureDate}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Fecha de llegada</small>
+                                                <h4>{{escala.actualArrivalDate}}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-3">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <h5>Costos</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="row" *ngFor="let costo of costs">
+                                            <div class="col-4">
+                                                <small class="stats-label">Id</small>
+                                                <h4>{{costo.costId}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Avion</small>
+                                                <h4>{{costo.flight.airplane.model}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Fecha inicial</small>
+                                                <h4>{{costo.validFromDate}}</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="stats-label">Fecha final</small>
+                                                <h4>{{costo.validToDate}}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="mt-3">
                                 <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
-                                    type="submit"><strong>Guardar</strong></button>
+                                    type="submit"
+                                    (click)="redirectTo('dashboard/supervisor/vuelos')"><strong>Guardar</strong></button>
                             </div>
                         </mat-step>
                     </mat-stepper>

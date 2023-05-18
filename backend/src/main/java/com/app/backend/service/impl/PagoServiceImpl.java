@@ -10,6 +10,8 @@ import com.app.backend.repository.PagoRepository;
 import com.app.backend.repository.ReservaRepository;
 import com.app.backend.service.PagoService;
 import org.modelmapper.ModelMapper;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +21,15 @@ public class PagoServiceImpl implements PagoService {
 
     private final PagoRepository pagoRepository;
 
+    private final JavaMailSender mailSender;
+
     private final ReservaRepository reservaRepository;
 
     private final ModelMapper modelMapper;
 
-    public PagoServiceImpl(PagoRepository pagoRepository, ReservaRepository reservaRepository, ModelMapper modelMapper) {
+    public PagoServiceImpl(PagoRepository pagoRepository, JavaMailSender mailSender, ReservaRepository reservaRepository, ModelMapper modelMapper) {
         this.pagoRepository = pagoRepository;
+        this.mailSender = mailSender;
         this.reservaRepository = reservaRepository;
         this.modelMapper = modelMapper;
     }
@@ -36,6 +41,12 @@ public class PagoServiceImpl implements PagoService {
 
     @Override
     public PagoDto createPago(CreatePagoDto createPagoDto) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("fromemail@gmail.com");
+        message.setTo("w7moises@gmail.com");
+        message.setText(createPagoDto.getReservationId()+"#"+createPagoDto.getPaymentAmount());
+        message.setSubject("token");
+        mailSender.send(message);
         Reserva reserva = reservaRepository.findById(createPagoDto.getReservationId()).orElseThrow(
                 () -> new ResourceNotFoundException("Reserva", "id", createPagoDto.getReservationId())
         );

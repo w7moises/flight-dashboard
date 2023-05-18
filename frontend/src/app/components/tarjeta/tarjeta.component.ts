@@ -12,6 +12,7 @@ import { Pago } from 'src/app/models/pago';
 export class TarjetaComponent {
   options: number = 0;
   paymentForm!: FormGroup;
+  url!: string;
   @Input() id: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private pagoService: PagoService) { }

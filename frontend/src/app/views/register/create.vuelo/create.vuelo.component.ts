@@ -17,6 +17,7 @@ import { Costo } from 'src/app/models/costo';
 import { CostoService } from '../../../services/costo.service';
 import { CreateCosto } from 'src/app/models/create/createCosto';
 import { CreateVuelo } from 'src/app/models/create/createVuelo';
+import { Vuelo } from 'src/app/models/vuelo';
 
 @Component({
   selector: 'app-create.vuelo',
@@ -38,6 +39,7 @@ export class CreateVueloComponent {
   airports!: Aereopuerto[];
   legs!: Escala[];
   costs!: Costo[];
+  flight: Vuelo = new Vuelo();
   departure_date = new FormControl;
   arrival_date = new FormControl;
   actual_departure_date = new FormControl;
@@ -92,6 +94,7 @@ export class CreateVueloComponent {
         var dateDepartureParts = dateDepartureString.split("-");
         var dateArrivalString = data.arrivalDate;
         var dateArrivalParts = dateArrivalString.split("-");
+        this.flight = data;
         this.flightForm.get('airline_id')?.setValue(data.airline.airline_id);
         this.flightForm.get('aircraft_id')?.setValue(data.airplane.aircraft_id);
         this.departure_date.setValue(new Date(+dateDepartureParts[2], dateDepartureParts[1] - 1, +dateDepartureParts[0]));
@@ -106,12 +109,6 @@ export class CreateVueloComponent {
 
   public redirectTo(uri: string) {
     this.router.navigate([uri]);
-  }
-
-  addCost() {
-    console.log(this.datePipe.transform(this.departure_date.value, 'dd-MM-yyyy'));
-    console.log(this.flightForm.value);
-    console.log(this.legForm.value);
   }
 
   editLeg(id: number) {
@@ -256,7 +253,6 @@ export class CreateVueloComponent {
   public updateCost() {
     this.costForm.get('flight_id')?.setValue(this.temp_id);
     this.costForm.get('airline_id')?.setValue(this.airline_id);
-    console.log(this.costForm.value)
     if (this.costForm.valid) {
       var body = new CreateCosto();
       body.airlineId = this.costForm.get('airline_id')?.value;
