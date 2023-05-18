@@ -39,6 +39,11 @@ public class EscalaServiceImpl implements EscalaService {
     }
 
     @Override
+    public List<EscalaDto> getEscalasByVueloId(Long vueloId) {
+        return escalaRepository.findAllByFlight_FlightId(vueloId).stream().map(escala -> modelMapper.map(escala, EscalaDto.class)).toList();
+    }
+
+    @Override
     public EscalaDto getEscalaById(Long escalaId) {
         Escala escala = escalaRepository.findById(escalaId).orElseThrow(
                 () -> new ResourceNotFoundException("Escala", "id", escalaId)
@@ -48,23 +53,23 @@ public class EscalaServiceImpl implements EscalaService {
 
     @Override
     public EscalaDto createEscala(CreateEscalaDto escalaDto) {
-        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(escalaDto.getOrigin_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getOrigin_airport_id())
+        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(escalaDto.getOriginAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getOriginAirportId())
         );
-        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(escalaDto.getDestination_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getDestination_airport_id())
+        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(escalaDto.getDestinationAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getDestinationAirportId())
         );
-        Vuelo optionalVuelo = vueloRepository.findById(escalaDto.getFlight_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Vuelo", "id", escalaDto.getFlight_id())
+        Vuelo optionalVuelo = vueloRepository.findById(escalaDto.getFlightId()).orElseThrow(
+                () -> new ResourceNotFoundException("Vuelo", "id", escalaDto.getFlightId())
         );
         Escala escala = new Escala();
         escala.setFlight(optionalVuelo);
         escala.setOrigin_airport(optionalAereopuertoOrigen);
         escala.setDestination_airport(optionalDAereopuertoDestino);
-        escala.setActual_arrival_date(escalaDto.getActual_arrival_date());
-        escala.setActual_arrival_time(escalaDto.getActual_arrival_time());
-        escala.setActual_departure_date(escalaDto.getActual_departure_date());
-        escala.setActual_departure_time(escalaDto.getActual_departure_time());
+        escala.setActualArrivalDate(escalaDto.getActualArrivalDate());
+        escala.setActualArrivalTime(escalaDto.getActualArrivalTime());
+        escala.setActualDepartureDate(escalaDto.getActualDepartureDate());
+        escala.setActualDepartureTime(escalaDto.getActualDepartureTime());
         return modelMapper.map(escalaRepository.save(escala), EscalaDto.class);
     }
 
@@ -73,22 +78,22 @@ public class EscalaServiceImpl implements EscalaService {
         Escala optionalEscala = escalaRepository.findById(escalaId).orElseThrow(
                 () -> new ResourceNotFoundException("Escala", "id", escalaId)
         );
-        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(escalaDto.getOrigin_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getOrigin_airport_id())
+        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(escalaDto.getOriginAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getOriginAirportId())
         );
-        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(escalaDto.getDestination_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getDestination_airport_id())
+        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(escalaDto.getDestinationAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", escalaDto.getDestinationAirportId())
         );
-        Vuelo optionalVuelo = vueloRepository.findById(escalaDto.getFlight_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Vuelo", "id", escalaDto.getFlight_id())
+        Vuelo optionalVuelo = vueloRepository.findById(escalaDto.getFlightId()).orElseThrow(
+                () -> new ResourceNotFoundException("Vuelo", "id", escalaDto.getFlightId())
         );
         optionalEscala.setFlight(optionalVuelo);
         optionalEscala.setOrigin_airport(optionalAereopuertoOrigen);
         optionalEscala.setDestination_airport(optionalDAereopuertoDestino);
-        optionalEscala.setActual_arrival_date(escalaDto.getActual_arrival_date());
-        optionalEscala.setActual_arrival_time(escalaDto.getActual_arrival_time());
-        optionalEscala.setActual_departure_date(escalaDto.getActual_departure_date());
-        optionalEscala.setActual_departure_time(escalaDto.getActual_departure_time());
+        optionalEscala.setActualArrivalDate(escalaDto.getActualArrivalDate());
+        optionalEscala.setActualArrivalTime(escalaDto.getActualArrivalTime());
+        optionalEscala.setActualDepartureDate(escalaDto.getActualDepartureDate());
+        optionalEscala.setActualDepartureTime(escalaDto.getActualDepartureTime());
         return modelMapper.map(escalaRepository.save(optionalEscala), EscalaDto.class);
     }
 

@@ -1,7 +1,5 @@
 package com.app.backend.dto.create;
 
-import com.app.backend.model.Aereolinea;
-import com.app.backend.model.Vuelo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,15 +15,15 @@ import java.util.Date;
 @NoArgsConstructor
 public class CreateCostoDto {
 
-    private Long flight_id;
+    private Long flightId;
 
-    private Long airline_id;
-
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date valid_from_date;
+    private Long airlineId;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date valid_to_date;
+    private Date validFromDate;
 
-    private BigDecimal flight_cost;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date validToDate;
+
+    private BigDecimal flightCost;
 }

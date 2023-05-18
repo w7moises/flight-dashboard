@@ -19,8 +19,8 @@ public class Aereolinea {
     private Long airline_id;
 
     @Column(name = "airline_name", nullable = false)
-    private String airline_name;
+    private String airlineName;
 
     @Column(name = "airline_code", nullable = false)
-    private String airline_code;
+    private String airlineCode;
 }

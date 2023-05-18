@@ -21,5 +21,5 @@ public class CreateReservaDto {
 
     private Long numberInParty;
 
-    private Long leg_id;
+    private Long legId;
 }

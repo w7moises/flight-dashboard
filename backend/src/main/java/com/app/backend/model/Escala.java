@@ -20,7 +20,7 @@ public class Escala {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "leg_id", nullable = false)
-    private Long leg_id;
+    private Long legId;
 
     @ManyToOne
     private Vuelo flight;
@@ -32,14 +32,14 @@ public class Escala {
     private Aereopuerto destination_airport;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date actual_departure_date;
+    private Date actualDepartureDate;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date actual_arrival_date;
+    private Date actualArrivalDate;
 
     @Column(name = "actual_departure_time", nullable = false)
-    private String actual_departure_time;
+    private String actualDepartureTime;
 
     @Column(name = "actual_arrival_time", nullable = false)
-    private String actual_arrival_time;
+    private String actualArrivalTime;
 }

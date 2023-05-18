@@ -3,6 +3,7 @@ import { Escala } from '../models/escala';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
+import { CreateEscala } from '../models/create/createEscala';
 
 @Injectable({
   providedIn: 'root'
@@ -31,21 +32,28 @@ export class EscalaService {
     return this.http.get<Escala>(`${this.baseEndPoint}/escalas/${id}`, { headers: corsHeaders });
   }
 
-  public createAgent(escala: Escala): Observable<Escala> {
+  public getLegByFlightId(id: number): Observable<Escala[]> {
+    let corsHeaders = new HttpHeaders({
+      Authorization: this.token,
+    });
+    return this.http.get<Escala[]>(`${this.baseEndPoint}/escalas/vuelo/${id}`, { headers: corsHeaders });
+  }
+
+  public createLeg(escala: CreateEscala): Observable<Escala> {
     let corsHeaders = new HttpHeaders({
       Authorization: this.token,
     });
     return this.http.post<Escala>(`${this.baseEndPoint}/escalas`, escala, { headers: corsHeaders });
   }
 
-  public updateAgent(id: number, escala: Escala): Observable<Escala> {
+  public updateLeg(id: number, escala: CreateEscala): Observable<Escala> {
     let corsHeaders = new HttpHeaders({
       Authorization: this.token,
     });
     return this.http.put<Escala>(`${this.baseEndPoint}/escalas/${id}`, escala, { headers: corsHeaders });
   }
 
-  public deleteAgent(id: number): Observable<Escala> {
+  public deleteLeg(id: number): Observable<Escala> {
     let corsHeaders = new HttpHeaders({
       Authorization: this.token,
     });

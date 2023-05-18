@@ -1,9 +1,9 @@
 export class CreateEscala {
-    flight_id!: number;
-    origin_airport_id!: number;
-    destination_airport_id!: number;
-    actual_departure_time!: string;
-    actual_arrival_time!: string;
-    actual_departure_date!: Date;
-    actual_arrival_date!: Date;
+    flightId!: number;
+    originAirportId!: number;
+    destinationAirportId!: number;
+    actualDepartureTime!: string;
+    actualArrivalTime!: string;
+    actualDepartureDate!: string;
+    actualArrivalDate!: string;
 }

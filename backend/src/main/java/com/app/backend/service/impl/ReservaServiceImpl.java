@@ -63,8 +63,8 @@ public class ReservaServiceImpl implements ReservaService {
         Pasajero pasajero = pasajeroRepository.findById(reservaDto.getPassengerId()).orElseThrow(
                 () -> new ResourceNotFoundException("Pasajero", "id", reservaDto.getPassengerId())
         );
-        Escala escala = escalaRepository.findById(reservaDto.getLeg_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Escala", "id", reservaDto.getLeg_id())
+        Escala escala = escalaRepository.findById(reservaDto.getLegId()).orElseThrow(
+                () -> new ResourceNotFoundException("Escala", "id", reservaDto.getLegId())
         );
         Reserva reserva = new Reserva();
         reserva.setAgent(agente);
@@ -73,7 +73,7 @@ public class ReservaServiceImpl implements ReservaService {
         reserva.setTravelTypeClass(reservaDto.getTravelTypeClass());
         reserva.setNumberInParty(reservaDto.getNumberInParty());
         reserva.setLeg(escala);
-        reserva.setTicketCode("RV00" + escala.getLeg_id().toString());
+        reserva.setTicketCode("RV00" + escala.getLegId().toString());
         return modelMapper.map(reservaRepository.save(reserva), ReservaDto.class);
     }
 
@@ -88,8 +88,8 @@ public class ReservaServiceImpl implements ReservaService {
         Pasajero pasajero = pasajeroRepository.findById(reservaDto.getPassengerId()).orElseThrow(
                 () -> new ResourceNotFoundException("Pasajero", "id", reservaDto.getPassengerId())
         );
-        Escala escala = escalaRepository.findById(reservaDto.getLeg_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Escala", "id", reservaDto.getLeg_id())
+        Escala escala = escalaRepository.findById(reservaDto.getLegId()).orElseThrow(
+                () -> new ResourceNotFoundException("Escala", "id", reservaDto.getLegId())
         );
         reserva.setAgent(agente);
         reserva.setPassenger(pasajero);
@@ -97,7 +97,7 @@ public class ReservaServiceImpl implements ReservaService {
         reserva.setTravelTypeClass(reservaDto.getTravelTypeClass());
         reserva.setNumberInParty(reservaDto.getNumberInParty());
         reserva.setLeg(escala);
-        reserva.setTicketCode("RV00" + escala.getLeg_id().toString());
+        reserva.setTicketCode("RV00" + escala.getLegId().toString());
         return modelMapper.map(reservaRepository.save(reserva), ReservaDto.class);
     }
 

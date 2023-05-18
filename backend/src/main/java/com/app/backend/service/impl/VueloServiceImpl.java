@@ -65,27 +65,27 @@ public class VueloServiceImpl implements VueloService {
 
     @Override
     public VueloDto createVuelo(CreateVueloDto createVueloDto) {
-        Avion optionalAvion = avionRepository.findById(createVueloDto.getAirplane_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Avion", "id", createVueloDto.getAirplane_id())
+        Avion optionalAvion = avionRepository.findById(createVueloDto.getAirplaneId()).orElseThrow(
+                () -> new ResourceNotFoundException("Avion", "id", createVueloDto.getAirplaneId())
         );
-        Aereolinea optionalAereolinea = aereolineaRepository.findById(createVueloDto.getAirline_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereolinea", "id", createVueloDto.getAirline_id())
+        Aereolinea optionalAereolinea = aereolineaRepository.findById(createVueloDto.getAirlineId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereolinea", "id", createVueloDto.getAirlineId())
         );
-        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(createVueloDto.getOrigin_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getOrigin_airport_id())
+        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(createVueloDto.getOriginAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getOriginAirportId())
         );
-        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(createVueloDto.getDestination_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getDestination_airport_id())
+        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(createVueloDto.getDestinationAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getDestinationAirportId())
         );
         Vuelo optionalVuelo = new Vuelo();
         optionalVuelo.setAirline(optionalAereolinea);
         optionalVuelo.setAirplane(optionalAvion);
         optionalVuelo.setOrigin_airport(optionalAereopuertoOrigen);
         optionalVuelo.setDestination_airport(optionalDAereopuertoDestino);
-        optionalVuelo.setArrival_date(createVueloDto.getArrival_date());
-        optionalVuelo.setArrival_time(createVueloDto.getArrival_time());
-        optionalVuelo.setDeparture_date(createVueloDto.getDeparture_date());
-        optionalVuelo.setDeparture_time(createVueloDto.getDeparture_time());
+        optionalVuelo.setArrivalDate(createVueloDto.getArrivalDate());
+        optionalVuelo.setArrivalTime(createVueloDto.getArrivalTime());
+        optionalVuelo.setDepartureDate(createVueloDto.getDepartureDate());
+        optionalVuelo.setDepartureTime(createVueloDto.getDepartureTime());
         return modelMapper.map(vueloRepository.save(optionalVuelo), VueloDto.class);
     }
 
@@ -94,26 +94,26 @@ public class VueloServiceImpl implements VueloService {
         Vuelo optionalVuelo = vueloRepository.findById(vueloId).orElseThrow(
                 () -> new ResourceNotFoundException("Vuelo", "id", vueloId)
         );
-        Avion optionalAvion = avionRepository.findById(createVueloDto.getAirplane_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Avion", "id", createVueloDto.getAirplane_id())
+        Avion optionalAvion = avionRepository.findById(createVueloDto.getAirplaneId()).orElseThrow(
+                () -> new ResourceNotFoundException("Avion", "id", createVueloDto.getAirplaneId())
         );
-        Aereolinea optionalAereolinea = aereolineaRepository.findById(createVueloDto.getAirline_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereolinea", "id", createVueloDto.getAirline_id())
+        Aereolinea optionalAereolinea = aereolineaRepository.findById(createVueloDto.getAirlineId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereolinea", "id", createVueloDto.getAirlineId())
         );
-        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(createVueloDto.getOrigin_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getOrigin_airport_id())
+        Aereopuerto optionalAereopuertoOrigen = aereopuertoRepository.findById(createVueloDto.getOriginAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getOriginAirportId())
         );
-        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(createVueloDto.getDestination_airport_id()).orElseThrow(
-                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getDestination_airport_id())
+        Aereopuerto optionalDAereopuertoDestino = aereopuertoRepository.findById(createVueloDto.getDestinationAirportId()).orElseThrow(
+                () -> new ResourceNotFoundException("Aereopuerto", "id", createVueloDto.getDestinationAirportId())
         );
         optionalVuelo.setAirline(optionalAereolinea);
         optionalVuelo.setAirplane(optionalAvion);
         optionalVuelo.setOrigin_airport(optionalAereopuertoOrigen);
         optionalVuelo.setDestination_airport(optionalDAereopuertoDestino);
-        optionalVuelo.setArrival_date(createVueloDto.getArrival_date());
-        optionalVuelo.setArrival_time(createVueloDto.getArrival_time());
-        optionalVuelo.setDeparture_date(createVueloDto.getDeparture_date());
-        optionalVuelo.setDeparture_time(createVueloDto.getDeparture_time());
+        optionalVuelo.setArrivalDate(createVueloDto.getArrivalDate());
+        optionalVuelo.setArrivalTime(createVueloDto.getArrivalTime());
+        optionalVuelo.setDepartureDate(createVueloDto.getDepartureDate());
+        optionalVuelo.setDepartureTime(createVueloDto.getDepartureTime());
         return modelMapper.map(vueloRepository.save(optionalVuelo), VueloDto.class);
     }
 

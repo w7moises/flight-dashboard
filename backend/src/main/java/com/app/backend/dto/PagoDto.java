@@ -17,14 +17,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class PagoDto {
 
-    private Long payment_id;
+    private Long paymentId;
 
     private Reserva reservation;
 
     private Status status;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date payment_date;
+    private Date paymentDate;
 
-    private BigDecimal payment_amount;
+    private BigDecimal paymentAmount;
 }

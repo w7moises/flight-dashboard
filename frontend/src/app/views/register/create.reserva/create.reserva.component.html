@@ -65,11 +65,11 @@
                                             <mat-form-field class="d-flex w-100">
                                                 <mat-label>Vuelo - Escalas</mat-label>
                                                 <mat-select formControlName="leg_id">
-                                                    <mat-option *ngFor="let leg of legs" [value]="leg.leg_id">
+                                                    <mat-option *ngFor="let leg of legs" [value]="leg.legId">
                                                         <div style="border-bottom: 1px solid #aaa;">
-                                                            <p>{{leg.origin_airport.airportName}}-{{leg.actual_departure_date}}:{{leg.actual_departure_time}}
+                                                            <p>{{leg.origin_airport.airportName}}-{{leg.actualDepartureDate}}:{{leg.actualDepartureTime}}
                                                             </p>
-                                                            <p>{{leg.destination_airport.airportName}}-{{leg.actual_arrival_date}}:{{leg.actual_arrival_time}}
+                                                            <p>{{leg.destination_airport.airportName}}-{{leg.actualArrivalDate}}:{{leg.actualArrivalTime}}
                                                             </p>
                                                         </div>
                                                     </mat-option>

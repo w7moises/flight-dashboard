@@ -16,6 +16,7 @@ public class Aereopuerto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "airport_id", nullable = false)
     private Long airportId;
 
     @Column(name = "airport_name", nullable = false)

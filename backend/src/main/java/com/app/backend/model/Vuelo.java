@@ -19,7 +19,8 @@ import java.util.Date;
 public class Vuelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long flight_id;
+    @Column(name = "flight_id", nullable = false)
+    private Long flightId;
 
     @OneToOne
     private Aereolinea airline;
@@ -35,15 +36,15 @@ public class Vuelo {
 
     @Column(name = "departure_date", nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date departure_date;
+    private Date departureDate;
 
     @Column(name = "departure_time", nullable = false)
-    private String departure_time;
+    private String departureTime;
 
     @Column(name = "arrival_date", nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date arrival_date;
+    private Date arrivalDate;
 
     @Column(name = "arrival_time", nullable = false)
-    private String arrival_time;
+    private String arrivalTime;
 }

@@ -28,6 +28,8 @@ import { FilterPipePasajero } from './pipe/filter.pasajero.pipe';
 import { FilterPipeAereopuerto } from './pipe/filter.aereopuerto.pipe';
 import { FilterPipeAgente } from './pipe/filter.agente';
 import { FilterPipeReserva } from './pipe/filter.reserva';
+import { FilterPipeVuelo } from './pipe/filter.vuelo.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { FilterPipeReserva } from './pipe/filter.reserva';
     FilterPipePasajero,
     FilterPipeAereopuerto,
     FilterPipeAgente,
-    FilterPipeReserva
+    FilterPipeReserva,
+    FilterPipeVuelo,
   ],
   imports: [
     BrowserModule,
@@ -61,9 +64,10 @@ import { FilterPipeReserva } from './pipe/filter.reserva';
     ReactiveFormsModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    DatePipe
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

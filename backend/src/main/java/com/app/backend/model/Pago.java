@@ -21,7 +21,8 @@ public class Pago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long payment_id;
+    @Column(name = "payment_id")
+    private Long paymentId;
 
     @OneToOne
     private Reserva reservation;
@@ -32,8 +33,8 @@ public class Pago {
     @Column(name = "payment_date", nullable = false)
     @CreationTimestamp
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date payment_date;
+    private Date paymentDate;
 
     @Column(name = "payment_amount", nullable = false)
-    private BigDecimal payment_amount;
+    private BigDecimal paymentAmount;
 }

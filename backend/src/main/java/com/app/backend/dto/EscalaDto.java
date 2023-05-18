@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class EscalaDto {
 
-    private Long leg_id;
+    private Long legId;
 
     private Vuelo flight;
 
@@ -26,14 +26,14 @@ public class EscalaDto {
     private Aereopuerto destination_airport;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date actual_departure_date;
+    private Date actualDepartureDate;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date actual_arrival_date;
+    private Date actualArrivalDate;
 
     @NotBlank(message = "departure_time is required")
-    private String actual_departure_time;
+    private String actualDepartureTime;
 
     @NotBlank(message = "arrival_time is required")
-    private String actual_arrival_time;
+    private String actualArrivalTime;
 }

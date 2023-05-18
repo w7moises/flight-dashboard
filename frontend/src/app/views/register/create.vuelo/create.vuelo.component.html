@@ -45,52 +45,86 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <form role="form" [formGroup]="flightForm">
-                                                <div class="form-group w-50"><label>Aereolínea</label> <input
-                                                        type="email" placeholder="Ingresar nombre de la aereolínea"
-                                                        class="form-control"></div>
-                                                <div class="form-group mt-3 w-50"><label>Avión</label> <input
-                                                        type="password" placeholder="Ingresar modelo del avión"
-                                                        class="form-control">
+                                                <div class="form-group w-75">
+                                                    <mat-form-field class="d-flex w-100">
+                                                        <mat-label>Aereolinea</mat-label>
+                                                        <mat-select formControlName="airline_id">
+                                                            <mat-option *ngFor="let aereolinea of airlines"
+                                                                [value]="aereolinea.airline_id">
+                                                                {{aereolinea.airlineName}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
                                                 </div>
-                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Origen</label>
-                                                    <input type="password" placeholder="Ingresar aereopuerto de salida"
-                                                        class="form-control">
+                                                <div class="form-group mt-3 w-75">
+                                                    <mat-form-field class="d-flex w-100">
+                                                        <mat-label>Avion</mat-label>
+                                                        <mat-select formControlName="aircraft_id">
+                                                            <mat-option *ngFor="let avion of aircrafts"
+                                                                [value]="avion.aircraft_id">
+                                                                {{avion.model}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
                                                 </div>
-                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Destino</label>
-                                                    <input type="password" placeholder="Ingresar aereopuerto de llegada"
-                                                        class="form-control">
+                                                <div class="form-group mt-3 w-75">
+                                                    <mat-form-field class="d-flex w-100">
+                                                        <mat-label>Aereopuerto Origen</mat-label>
+                                                        <mat-select formControlName="origin_airport_id">
+                                                            <mat-option *ngFor="let aereopuerto of airports"
+                                                                [value]="aereopuerto.airportId">
+                                                                {{aereopuerto.airportName}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group mt-3 w-75">
+                                                    <mat-form-field class="d-flex w-100">
+                                                        <mat-label>Aereopuerto Llegada</mat-label>
+                                                        <mat-select formControlName="destination_airport_id">
+                                                            <mat-option *ngFor="let aereopuerto of airports"
+                                                                [value]="aereopuerto.airportId">
+                                                                {{aereopuerto.airportName}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label>Fecha inicial</label>
-                                                    <mat-form-field appearance="fill" class="d-flex w-50">
+                                                    <mat-form-field appearance="fill" class="d-flex w-75">
                                                         <mat-label>Ingresar fecha inicial</mat-label>
-                                                        <input matInput [matDatepicker]="pickerIn1">
+                                                        <input matInput [matDatepicker]="picker1"
+                                                            [formControl]="departure_date">
                                                         <mat-datepicker-toggle matIconSuffix
-                                                            [for]="pickerIn1"></mat-datepicker-toggle>
-                                                        <mat-datepicker #pickerIn1></mat-datepicker>
+                                                            [for]="picker1"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker1></mat-datepicker>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="form-group w-50"><label>Hora inicial</label>
-                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                <div class="form-group w-75"><label>Hora inicial</label>
+                                                    <input type="time" class="form-control" value="00:00 AM"
+                                                        formControlName="departure_time" />
                                                 </div>
-                                                <div class="form-group mt-3 w-50">
-                                                    <label>Fecha final</label>
-                                                    <mat-form-field appearance="fill" class="d-flex">
+                                                <div class="form-group mt-3">
+                                                    <label>Fecha inicial</label>
+                                                    <mat-form-field appearance="fill" class="d-flex w-75">
                                                         <mat-label>Ingresar fecha final</mat-label>
-                                                        <input matInput [matDatepicker]="pickerOut1">
+                                                        <input matInput [matDatepicker]="picker2"
+                                                            [formControl]="arrival_date">
                                                         <mat-datepicker-toggle matIconSuffix
-                                                            [for]="pickerOut1"></mat-datepicker-toggle>
-                                                        <mat-datepicker #pickerOut1></mat-datepicker>
+                                                            [for]="picker2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker2></mat-datepicker>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="form-group w-50"><label>Hora Final</label>
-                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                <div class="form-group w-75"><label>Hora Final</label>
+                                                    <input type="time" class="form-control" value="00:00 AM"
+                                                        formControlName="arrival_time" />
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="mt-3">
+                                        <div class=" mt-3">
                                             <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
-                                                style="float: right;" matStepperNext><strong>Siguiente</strong></button>
+                                                style="float: right;" matStepperNext
+                                                (click)="updateFlight()"><strong>Siguiente</strong></button>
                                         </div>
                                     </div>
                                 </div>
@@ -106,51 +140,77 @@
                                 </div>
                                 <div class="ibox-content">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-5">
                                             <form role="form" [formGroup]="legForm">
-                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Origen</label>
-                                                    <input type="password" placeholder="Ingresar aereopuerto de salida"
-                                                        class="form-control">
+                                                <div class="form-group mt-3 w-75">
+                                                    <mat-form-field class="d-flex w-100">
+                                                        <mat-label>Aereopuerto Origen</mat-label>
+                                                        <mat-select formControlName="origin_airport_id">
+                                                            <mat-option *ngFor="let aereopuerto of airports"
+                                                                [value]="aereopuerto.airportId">
+                                                                {{aereopuerto.airportName}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
                                                 </div>
-                                                <div class="form-group mt-3 w-50"><label>Aereopuerto Destino</label>
-                                                    <input type="password" placeholder="Ingresar aereopuerto de llegada"
-                                                        class="form-control">
+                                                <div class="form-group mt-3 w-75">
+                                                    <mat-form-field class="d-flex w-100">
+                                                        <mat-label>Aereopuerto Llegada</mat-label>
+                                                        <mat-select formControlName="destination_airport_id">
+                                                            <mat-option *ngFor="let aereopuerto of airports"
+                                                                [value]="aereopuerto.airportId">
+                                                                {{aereopuerto.airportName}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label>Fecha inicial</label>
                                                     <br>
-                                                    <mat-form-field appearance="fill" class="d-flex w-50">
+                                                    <mat-form-field appearance="fill" class="d-flex w-75">
                                                         <mat-label>Ingresar fecha inicial</mat-label>
-                                                        <input matInput [matDatepicker]="pickerIn2">
+                                                        <input matInput [matDatepicker]="pickerIn2"
+                                                            [formControl]="actual_departure_date">
                                                         <mat-datepicker-toggle matIconSuffix
                                                             [for]="pickerIn2"></mat-datepicker-toggle>
                                                         <mat-datepicker #pickerIn2></mat-datepicker>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="form-group w-50"><label>Hora inicial</label>
-                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                <div class="form-group w-75"><label>Hora inicial</label>
+                                                    <input type="time" class="form-control" value="00:00 AM"
+                                                        formControlName="actual_departure_time" />
                                                 </div>
                                                 <div class="form-group mt-3">
                                                     <label>Fecha final</label>
                                                     <br>
-                                                    <mat-form-field appearance="fill" class="d-flex w-50">
+                                                    <mat-form-field appearance="fill" class="d-flex w-75">
                                                         <mat-label>Ingresar fecha final</mat-label>
-                                                        <input matInput [matDatepicker]="pickerOut2">
+                                                        <input matInput [matDatepicker]="pickerOut2"
+                                                            [formControl]="actual_arrival_date">
                                                         <mat-datepicker-toggle matIconSuffix
                                                             [for]="pickerOut2"></mat-datepicker-toggle>
                                                         <mat-datepicker #pickerOut2></mat-datepicker>
                                                     </mat-form-field>
                                                 </div>
-                                                <div class="form-group w-50"><label>Hora Final</label>
-                                                    <input type="time" class="form-control" value="00:00 AM" />
+                                                <div class="form-group w-75"><label>Hora Final</label>
+                                                    <input type="time" class="form-control" value="00:00 AM"
+                                                        formControlName="actual_arrival_time" />
                                                 </div>
                                             </form>
+                                            <div class="mt-3">
+                                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                    style="margin-left: 28%;"
+                                                    (click)="updateLeg()"><strong>Guardar</strong></button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 mt-4">
+                                        <div class="col-sm-6 mt-4">
                                             <table
                                                 class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
                                                 <thead>
                                                     <tr>
+                                                        <th data-toggle="true"
+                                                            class="footable-visible footable-sortable footable-v-column">
+                                                            Id<span class="footable-sort-indicator"></span></th>
                                                         <th data-toggle="true"
                                                             class="footable-visible footable-sortable footable-v-column">
                                                             Aereopuerto Origen<span
@@ -169,14 +229,22 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="footable-even" style="">
-                                                        <td class="footable-visible footable-first-column"><span
-                                                                class="footable-toggle"></span>Jorge chavez</td>
-                                                        <td class="footable-visible">Jorge Chavez</td>
-                                                        <td class="footable-visible">22/05/2022</td>
-                                                        <td class="footable-visible">22/05/2022</td>
+                                                    <tr class="footable-even" *ngFor="let escala of legs">
+                                                        <td class="footable-visible">{{escala.legId}}</td>
+                                                        <td class="footable-visible">
+                                                            {{escala.origin_airport.airportName}}</td>
+                                                        <td class="footable-visible">
+                                                            {{escala.destination_airport.airportName}}</td>
+                                                        <td class="footable-visible">{{escala.actualDepartureDate}} :
+                                                            {{escala.actualDepartureTime}}</td>
+                                                        <td class="footable-visible">{{escala.actualArrivalDate}} :
+                                                            {{escala.actualArrivalTime}}</td>
                                                         <td class="footable-visible footable-last-column">
-                                                            <p style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;X</p>
+                                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                                (click)="editLeg(escala.legId)"><strong>Elegir</strong></button>
+                                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                                style="margin-left:8px;"
+                                                                (click)="deleteLeg(escala)"><strong>Eliminar</strong></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -206,20 +274,20 @@
                                                 </div>
                                                 <mat-form-field appearance="fill" class="d-flex w-75">
                                                     <mat-label>Ingresar fecha inicial</mat-label>
-                                                    <input matInput [matDatepicker]="valid_from_date"
-                                                        formControlName="valid_from_date">
+                                                    <input matInput [matDatepicker]="picker3"
+                                                        [formControl]="valid_from_date">
                                                     <mat-datepicker-toggle matIconSuffix
-                                                        [for]="valid_from_date"></mat-datepicker-toggle>
-                                                    <mat-datepicker #valid_from_date></mat-datepicker>
+                                                        [for]="picker3"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker3></mat-datepicker>
                                                 </mat-form-field>
                                                 <div class="form-group mt-3"><label>Fecha final</label></div>
                                                 <mat-form-field appearance="fill" class="d-flex w-75">
                                                     <mat-label>Ingresar fecha final</mat-label>
-                                                    <input matInput [matDatepicker]="valid_to_date"
-                                                        formControlName="valid_to_date">
+                                                    <input matInput [matDatepicker]="picker4"
+                                                        [formControl]="valid_to_date">
                                                     <mat-datepicker-toggle matIconSuffix
-                                                        [for]="valid_to_date"></mat-datepicker-toggle>
-                                                    <mat-datepicker #valid_to_date></mat-datepicker>
+                                                        [for]="picker4"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker4></mat-datepicker>
                                                 </mat-form-field>
                                                 <div class="form-group w-75 mt-3"><label>Monto</label> <input
                                                         type="number" formControlName="flight_cost"
@@ -232,6 +300,11 @@
                                                     Por favor, escriba algun monto
                                                 </p>
                                             </form>
+                                            <div class="mt-3">
+                                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs mt-4"
+                                                    style="margin-left: 25%;"
+                                                    (click)="updateCost()"><strong>Guardar</strong></button>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 mt-4">
                                             <table
@@ -240,12 +313,17 @@
                                                     <tr>
                                                         <th data-toggle="true"
                                                             class="footable-visible footable-sortable footable-first-column">
+                                                            Id<span class="footable-sort-indicator"></span></th>
+                                                        <th data-toggle="true"
+                                                            class="footable-visible footable-sortable footable-first-column">
                                                             Monto<span class="footable-sort-indicator"></span></th>
+                                                        <th data-toggle="true"
+                                                            class="footable-visible footable-sortable footable-first-column">
+                                                            Aereolinea<span class="footable-sort-indicator"></span></th>
                                                         <th data-type="numeric"
                                                             class="footable-visible footable-sortable">Fecha
                                                             inicial<span class="footable-sort-indicator"></span></th>
-                                                        <th data-hide="all" class="footable-sortable"
-                                                            style="display: none;">Fecha final<span
+                                                        <th data-hide="all" class="footable-sortable">Fecha final<span
                                                                 class="footable-sort-indicator"></span></th>
                                                         <th
                                                             class="footable-visible footable-sortable footable-last-column">
@@ -253,13 +331,18 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="footable-even" style="">
-                                                        <td class="footable-visible footable-first-column"><span
-                                                                class="footable-toggle"></span>1500</td>
-                                                        <td class="footable-visible">22/05/2022</td>
-                                                        <td class="footable-visible">22/06/2022</td>
+                                                    <tr class="footable-even" *ngFor="let costo of costs">
+                                                        <td class="footable-visible">{{costo.costId}}</td>
+                                                        <td class="footable-visible">{{costo.flightCost}}</td>
+                                                        <td class="footable-visible">{{costo.airline.airlineName}}</td>
+                                                        <td class="footable-visible">{{costo.validFromDate}}</td>
+                                                        <td class="footable-visible">{{costo.validToDate}}</td>
                                                         <td class="footable-visible footable-last-column">
-                                                            <p style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;X</p>
+                                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                                (click)="editCost(costo.costId)"><strong>Elegir</strong></button>
+                                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                                                style="margin-left:8px;"
+                                                                (click)="deleteCost(costo)"><strong>Eliminar</strong></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -267,8 +350,7 @@
                                         </div>
                                         <div class="mt-3">
                                             <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
-                                                (click)="addCost()" style="float: right;"
-                                                matStepperNext><strong>Siguiente</strong></button>
+                                                style="float: right;" matStepperNext><strong>Siguiente</strong></button>
                                         </div>
                                     </div>
                                 </div>

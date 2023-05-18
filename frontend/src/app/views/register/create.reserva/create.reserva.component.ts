@@ -45,11 +45,10 @@ export class CreateReservaComponent {
     if (this.id != 0) {
       this.title = 'Editar';
       this.reservaService.getReservationById(this.id).subscribe((data: any) => {
-        console.log(data);
         this.bookingForm.get('passenger_id')?.setValue(data.passenger.passengerId);
         this.bookingForm.get('travel_type_class')?.setValue(data.travelTypeClass);
         this.bookingForm.get('number_in_party')?.setValue(data.numberInParty);
-        this.bookingForm.get('leg_id')?.setValue(data.leg.leg_id);
+        this.bookingForm.get('leg_id')?.setValue(data.leg.legId);
       });
     }
   }
@@ -62,14 +61,13 @@ export class CreateReservaComponent {
       body.passengerId = this.bookingForm.get('passenger_id')?.value;
       body.travelTypeClass = this.bookingForm.get('travel_type_class')?.value;
       body.numberInParty = this.bookingForm.get('number_in_party')?.value;
-      body.leg_id = this.bookingForm.get('leg_id')?.value;
+      body.legId = this.bookingForm.get('leg_id')?.value;
       if (this.id != 0) {
         updateBody.agentId = 1;
         updateBody.passengerId = this.bookingForm.get('passenger_id')?.value;
         updateBody.travelTypeClass = this.bookingForm.get('travel_type_class')?.value;
         updateBody.numberInParty = this.bookingForm.get('number_in_party')?.value;
-        updateBody.leg_id = this.bookingForm.get('leg_id')?.value;
-        console.log(updateBody);
+        updateBody.legId = this.bookingForm.get('leg_id')?.value;
         this.reservaService.updateReservation(this.id, updateBody).subscribe((data: any) => {
           this.redirectTo('dashboard/agente');
         });

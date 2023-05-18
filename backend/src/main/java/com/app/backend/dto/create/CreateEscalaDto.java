@@ -15,21 +15,21 @@ import java.util.Date;
 @NoArgsConstructor
 public class CreateEscalaDto {
 
-    private Long flight_id;
+    private Long flightId;
 
-    private Long origin_airport_id;
+    private Long originAirportId;
 
-    private Long destination_airport_id;
-
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date actual_departure_date;
+    private Long destinationAirportId;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date actual_arrival_date;
+    private Date actualDepartureDate;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date actualArrivalDate;
 
     @NotBlank(message = "departure_time is required")
-    private String actual_departure_time;
+    private String actualDepartureTime;
 
     @NotBlank(message = "arrival_time is required")
-    private String actual_arrival_time;
+    private String actualArrivalTime;
 }

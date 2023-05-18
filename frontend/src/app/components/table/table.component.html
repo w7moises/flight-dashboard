@@ -178,11 +178,11 @@
                   {{reserva.numberInParty}}
                 </td>
                 <td><button type="button"
-                    [disabled]="reserva.reservation_status_code=='CANCELADO' || reserva.reservation_status_code=='TERMINADO'"
+                    [disabled]="reserva.reservationStatusCode=='CANCELADO' || reserva.reservationStatusCode=='TERMINADO'"
                     class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" (click)="edit(reserva)">
                     &nbsp;{{button}}&nbsp;&nbsp;&nbsp;</button>
                   <button type="button"
-                    [disabled]="reserva.reservation_status_code=='CANCELADO' || reserva.reservation_status_code=='TERMINADO'"
+                    [disabled]="reserva.reservationStatusCode=='CANCELADO' || reserva.reservationStatusCode=='TERMINADO'"
                     class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" (click)="delete(reserva)">
                     Eliminar</button>
                 </td>
@@ -212,27 +212,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="gradeX footable-even" *ngFor="let vuelo of vueloPage | filterAereopuerto:filterPost">
+              <tr class="gradeX footable-even" *ngFor="let vuelo of vueloPage | filterVuelo:filterPost">
                 <td class="footable-visible">
-                  {{vuelo.flight_id}}
+                  {{vuelo.flightId}}
                 </td>
                 <td class="footable-visible">
-                  {{vuelo.airline.airline_name}}
+                  {{vuelo.airline.airlineName}}
                 </td>
                 <td class="footable-visible">
                   {{vuelo.airplane.model}}
                 </td>
                 <td class="footable-visible">
-                  {{vuelo.origin_airport.airport_name}}
+                  {{vuelo.origin_airport.airportName}}
                 </td>
                 <td class="footable-visible">
-                  {{vuelo.destination_airport.airport_name}}
+                  {{vuelo.destination_airport.airportName}}
                 </td>
                 <td class="footable-visible">
-                  {{vuelo.departure_date}} : {{vuelo.departure_time}}
+                  {{vuelo.departureDate}} : {{vuelo.departureTime}}
                 </td>
                 <td class="footable-visible">
-                  {{vuelo.arrival_date}} : {{vuelo.arrival_time}}
+                  {{vuelo.arrivalDate}} : {{vuelo.arrivalTime}}
                 </td>
                 <td><button type="button" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"
                     (click)="edit(vuelo)">

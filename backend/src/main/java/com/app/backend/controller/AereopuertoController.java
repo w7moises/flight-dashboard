@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/aereopuertos")
@@ -30,6 +32,12 @@ public class AereopuertoController {
     public ResponseEntity<AereopuertoDto> getAereopuertoById(@PathVariable Long id) {
         AereopuertoDto aereopuerto = aereopuertoService.getAereopuertoById(id);
         return new ResponseEntity<>(aereopuerto, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AereopuertoDto>> getAereopuertos() {
+        List<AereopuertoDto> aereopuertos = aereopuertoService.getAereopuertos();
+        return new ResponseEntity<>(aereopuertos, HttpStatus.OK);
     }
 
     @PostMapping

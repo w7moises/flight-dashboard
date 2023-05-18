@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -19,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class VueloDto {
 
-    private Long flight_id;
+    private Long flightId;
 
     private Aereolinea airline;
 
@@ -30,14 +29,14 @@ public class VueloDto {
     private Aereopuerto destination_airport;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date departure_date;
+    private Date departureDate;
 
     @NotBlank(message = "departure_time is required")
-    private String departure_time;
+    private String departureTime;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date arrival_date;
+    private Date arrivalDate;
 
     @NotBlank(message = "arrival_time is required")
-    private String arrival_time;
+    private String arrivalTime;
 }

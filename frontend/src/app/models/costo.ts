@@ -1,11 +1,11 @@
 import { Aereolinea } from "./aereolinea";
 import { Vuelo } from "./vuelo";
 
-export class Costos {
+export class Costo {
     costId!: number;
     flight!: Vuelo;
     airline!: Aereolinea;
-    validFromDate!: string;
-    validToDate!: string;
+    validFromDate!: Date;
+    validToDate!: Date;
     flightCost!: number;
 }

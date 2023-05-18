@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AereopuertoServiceImpl implements AereopuertoService {
 
@@ -25,6 +27,11 @@ public class AereopuertoServiceImpl implements AereopuertoService {
     @Override
     public Page<AereopuertoDto> getAereopuertos(Pageable pageable) {
         return aereopuertoRepository.findAll(pageable).map(aereopuerto -> modelMapper.map(aereopuerto, AereopuertoDto.class));
+    }
+
+    @Override
+    public List<AereopuertoDto> getAereopuertos() {
+        return aereopuertoRepository.findAll().stream().map(aereopuerto -> modelMapper.map(aereopuerto, AereopuertoDto.class)).toList();
     }
 
     @Override

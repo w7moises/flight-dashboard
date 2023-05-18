@@ -142,7 +142,7 @@ export class TableComponent {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.agentId }]);
     }
     if (this.data == 'supervisor/vuelos') {
-      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.flight_id }]);
+      this.router.navigate(['dashboard/' + this.data + '/create', { id: body.flightId }]);
     }
     if (this.data == 'supervisor/aereopuertos') {
       this.router.navigate(['dashboard/' + this.data + '/create', { id: body.airportId }]);

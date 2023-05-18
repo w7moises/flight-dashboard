@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CreatePagoDto {
 
-    private Long reservation_id;
+    private Long reservationId;
 
-    private BigDecimal payment_amount;
+    private BigDecimal paymentAmount;
 }

@@ -9,6 +9,8 @@ public interface EscalaService {
 
     List<EscalaDto> getAllEscalas();
 
+    List<EscalaDto> getEscalasByVueloId(Long vueloId);
+
     EscalaDto getEscalaById(Long escalaId);
 
     EscalaDto createEscala(CreateEscalaDto escalaDto);

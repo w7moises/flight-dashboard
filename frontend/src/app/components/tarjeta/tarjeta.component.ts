@@ -33,8 +33,8 @@ export class TarjetaComponent {
   pay() {
     if (this.paymentForm.valid) {
       var body = new Pago();
-      body.reservation_id = this.id;
-      body.payment_amount = 100;
+      body.reservationId = this.id;
+      body.paymentAmount = 100;
       this.pagoService.createPayment(body).subscribe((data: any) => {
         this.router.navigate(['/dashboard/pasajero']);
       });

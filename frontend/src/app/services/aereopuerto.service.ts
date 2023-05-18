@@ -25,6 +25,13 @@ export class AereopuertoService {
     return this.http.get(`${this.baseEndPoint}/aereopuertos/page`, { params: params, headers: corsHeaders });
   }
 
+  public getAirportsList(): Observable<Aereopuerto[]> {
+    let corsHeaders = new HttpHeaders({
+      Authorization: this.token,
+    });
+    return this.http.get<Aereopuerto[]>(`${this.baseEndPoint}/aereopuertos`, { headers: corsHeaders });
+  }
+
   public getAirportById(id: number): Observable<Aereopuerto> {
     let corsHeaders = new HttpHeaders({
       Authorization: this.token,

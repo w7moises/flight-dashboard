@@ -3,5 +3,5 @@ export class CreateReserva {
     passengerId!: number;
     travelTypeClass!: string;
     numberInParty!: number;
-    leg_id!: number;
+    legId!: number;
 }

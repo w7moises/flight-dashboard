@@ -15,23 +15,23 @@ import java.util.Date;
 @NoArgsConstructor
 public class CreateVueloDto {
 
-    private Long airline_id;
+    private Long airlineId;
 
-    private Long airplane_id;
+    private Long airplaneId;
 
-    private Long origin_airport_id;
+    private Long originAirportId;
 
-    private Long destination_airport_id;
+    private Long destinationAirportId;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date departure_date;
+    private Date departureDate;
 
     @NotBlank(message = "departure_time is required")
-    private String departure_time;
+    private String departureTime;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date arrival_date;
+    private Date arrivalDate;
 
     @NotBlank(message = "arrival_time is required")
-    private String arrival_time;
+    private String arrivalTime;
 }

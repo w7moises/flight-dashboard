@@ -27,6 +27,12 @@ public class EscalaController {
         return new ResponseEntity<>(escalaList, HttpStatus.OK);
     }
 
+    @GetMapping("vuelo/{id}")
+    public ResponseEntity<List<EscalaDto>> getAllEscalasByVueloId(@PathVariable Long id) {
+        List<EscalaDto> escalaList =escalaService.getEscalasByVueloId(id);
+        return new ResponseEntity<>(escalaList, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<EscalaDto> getEscalaById(@PathVariable Long id) {
         EscalaDto escala = escalaService.getEscalaById(id);
