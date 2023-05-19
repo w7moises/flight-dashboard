@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PagoService } from '../../services/pago.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pago } from 'src/app/models/pago';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tarjeta',
@@ -15,7 +16,7 @@ export class TarjetaComponent {
   url!: string;
   @Input() id: number = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private pagoService: PagoService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private pagoService: PagoService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.paymentForm = new FormGroup({
@@ -37,6 +38,16 @@ export class TarjetaComponent {
       body.reservationId = this.id;
       body.paymentAmount = 100;
       this.pagoService.createPayment(body).subscribe((data: any) => {
+        if (data.length != 0) {
+          this.snackBar.open(
+            'Esperando confirmación de pago',
+            '',
+            {
+              duration: 3000,
+              panelClass: ['red-snackbar'],
+            }
+          );
+        }
         this.router.navigate(['/dashboard/pasajero']);
       });
     }

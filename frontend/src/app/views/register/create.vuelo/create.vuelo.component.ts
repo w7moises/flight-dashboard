@@ -127,8 +127,6 @@ export class CreateVueloComponent {
   }
 
   public save(uri: string) {
-    console.log(this.isEscalaDone);
-    console.log(this.isCostoDone);
     if (this.isEscalaDone == true && this.isCostoDone == true) {
       this.router.navigate([uri]);
     } else {

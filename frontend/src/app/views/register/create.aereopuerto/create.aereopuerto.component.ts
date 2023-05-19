@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Aereopuerto } from 'src/app/models/aereopuerto';
 import { AereopuertoService } from 'src/app/services/aereopuerto.service';
@@ -14,7 +15,7 @@ export class CreateAereopuertoComponent {
   id: number = 0;
   airportForm!: FormGroup;
 
-  constructor(private router: Router, private route: ActivatedRoute, private aerepuertoService: AereopuertoService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private aerepuertoService: AereopuertoService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -48,6 +49,15 @@ export class CreateAereopuertoComponent {
       } else {
         this.aerepuertoService.createAirport(body).subscribe((data: any) => { this.redirectTo('dashboard/supervisor/aereopuertos'); });
       }
+    } else {
+      this.snackBar.open(
+        'Rellenar todos los campos',
+        '',
+        {
+          duration: 3000,
+          panelClass: ['red-snackbar'],
+        }
+      );
     }
   }
   public redirectTo(uri: string) {

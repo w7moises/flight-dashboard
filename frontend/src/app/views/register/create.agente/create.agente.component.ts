@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agente } from 'src/app/models/agente';
 import { AgenteService } from 'src/app/services/agente.service';
@@ -14,7 +15,7 @@ export class CreateAgenteComponent {
   id: number = 0;
   agentForm!: FormGroup;
 
-  constructor(private router: Router, private route: ActivatedRoute, private service: AgenteService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private service: AgenteService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -46,6 +47,15 @@ export class CreateAgenteComponent {
           this.redirectTo('dashboard/supervisor');
         });
       }
+    } else {
+      this.snackBar.open(
+        'Rellenar todos los campos',
+        '',
+        {
+          duration: 3000,
+          panelClass: ['red-snackbar'],
+        }
+      );
     }
   }
 

@@ -22,7 +22,6 @@ export class ModalDeleteComponent {
     private costoService: CostoService) { }
 
   onClick(): void {
-    console.log(this.data);
     if (this.data.hasOwnProperty('passengerId')) {
       this.pasajeroService.deletePassenger(this.data.passengerId).subscribe((data: any) => { this.dialogRef.close() });
     }

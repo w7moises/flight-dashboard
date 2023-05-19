@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PasajeroService } from 'src/app/services/pasajero.service';
 import { Pasajero } from 'src/app/models/pasajero';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create.pasajero',
@@ -14,7 +15,7 @@ export class CreatePasajeroComponent {
   id: number = 0;
   passengerForm!: FormGroup;
 
-  constructor(private router: Router, private route: ActivatedRoute, private service: PasajeroService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private service: PasajeroService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -70,6 +71,15 @@ export class CreatePasajeroComponent {
       } else {
         this.service.createPassenger(body).subscribe((data: any) => { this.redirectTo('dashboard/agente/pasajero'); });
       }
+    } else {
+      this.snackBar.open(
+        'Rellenar todos los campos',
+        '',
+        {
+          duration: 3000,
+          panelClass: ['red-snackbar'],
+        }
+      );
     }
   }
 
