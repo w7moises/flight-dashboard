@@ -22,6 +22,7 @@ export class ModalDeleteComponent {
     private costoService: CostoService) { }
 
   onClick(): void {
+    console.log(this.data);
     if (this.data.hasOwnProperty('passengerId')) {
       this.pasajeroService.deletePassenger(this.data.passengerId).subscribe((data: any) => { this.dialogRef.close() });
     }
@@ -32,7 +33,7 @@ export class ModalDeleteComponent {
       this.aereopuertoService.deleteAirport(this.data.airportId).subscribe((data: any) => { this.dialogRef.close() });
     }
     if (this.data.hasOwnProperty('reservationId')) {
-      this.reservationService.deleteReservation(this.data.reservation_id).subscribe((data: any) => { this.dialogRef.close() });
+      this.reservationService.deleteReservation(this.data.reservationId).subscribe((data: any) => { this.dialogRef.close() });
     }
     if (this.data.hasOwnProperty('flightId')) {
       this.vueloService.deleteFlight(this.data.flightId).subscribe((data: any) => { this.dialogRef.close() });

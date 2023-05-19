@@ -32,8 +32,8 @@
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                    <mat-stepper [linear]="false" #stepper>
-                        <mat-step>
+                    <mat-stepper [linear]="true" #stepper>
+                        <mat-step [completed]="isEditable">
                             <ng-template matStepLabel>Vuelo</ng-template>
                             <div class="ibox float-e-margins mt-3">
                                 <div class="ibox-title">
@@ -123,8 +123,8 @@
                                         </div>
                                         <div class=" mt-3">
                                             <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
-                                                style="float: right;" matStepperNext
-                                                (click)="updateFlight()"><strong>Siguiente</strong></button>
+                                                style="float: right;"
+                                                (click)="updateFlight(stepper)"><strong>Siguiente</strong></button>
                                         </div>
                                     </div>
                                 </div>
@@ -446,7 +446,7 @@
                             <div class="mt-3">
                                 <button class="btn btn-sm btn-primary pull-right m-t-n-xs" style="float: right;"
                                     type="submit"
-                                    (click)="redirectTo('dashboard/supervisor/vuelos')"><strong>Guardar</strong></button>
+                                    (click)="save('dashboard/supervisor/vuelos')"><strong>Guardar</strong></button>
                             </div>
                         </mat-step>
                     </mat-stepper>

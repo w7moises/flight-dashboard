@@ -18,6 +18,8 @@ import { CostoService } from '../../../services/costo.service';
 import { CreateCosto } from 'src/app/models/create/createCosto';
 import { CreateVuelo } from 'src/app/models/create/createVuelo';
 import { Vuelo } from 'src/app/models/vuelo';
+import { MatStepper } from '@angular/material/stepper';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create.vuelo',
@@ -46,9 +48,13 @@ export class CreateVueloComponent {
   actual_arrival_date = new FormControl;
   valid_from_date = new FormControl;
   valid_to_date = new FormControl;
+  isEditable = false;
+  isEscalaDone = false;
+  isCostoDone = false;
+
   constructor(private router: Router, private route: ActivatedRoute, private reservaService: ReservaService,
     private aereopuertoService: AereopuertoService, private datePipe: DatePipe, private vueloService: VueloService,
-    private dialog: MatDialog, private escalaService: EscalaService, private costoService: CostoService) { }
+    private dialog: MatDialog, private escalaService: EscalaService, private costoService: CostoService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -63,9 +69,17 @@ export class CreateVueloComponent {
     });
     this.escalaService.getLegByFlightId(this.id).subscribe(data => {
       this.legs = data;
+      if (data.length != 0) {
+        this.isEditable = true;
+        this.isEscalaDone = true;
+      }
     });
     this.costoService.getCostsByFlightId(this.id).subscribe(data => {
       this.costs = data;
+      if (data.length != 0) {
+        this.isEditable = true;
+        this.isCostoDone = true;
+      }
     });
     this.flightForm = new FormGroup({
       airline_id: new FormControl('', Validators.required),
@@ -89,6 +103,7 @@ export class CreateVueloComponent {
     });
     if (this.id != 0) {
       this.title = 'Editar';
+      this.isEditable = true;
       this.vueloService.getFlightById(this.id).subscribe((data: any) => {
         var dateDepartureString = data.departureDate;
         var dateDepartureParts = dateDepartureString.split("-");
@@ -109,6 +124,23 @@ export class CreateVueloComponent {
 
   public redirectTo(uri: string) {
     this.router.navigate([uri]);
+  }
+
+  public save(uri: string) {
+    console.log(this.isEscalaDone);
+    console.log(this.isCostoDone);
+    if (this.isEscalaDone == true && this.isCostoDone == true) {
+      this.router.navigate([uri]);
+    } else {
+      this.snackBar.open(
+        'Falta guardar datos en Escala y Costo',
+        '',
+        {
+          duration: 3000,
+          panelClass: ['red-snackbar'],
+        }
+      );
+    }
   }
 
   editLeg(id: number) {
@@ -183,7 +215,7 @@ export class CreateVueloComponent {
     }
   }
 
-  public updateFlight() {
+  public updateFlight(stepper: MatStepper) {
     if (this.flightForm.valid) {
       var body = new CreateVuelo();
       body.airlineId = this.flightForm.get('airline_id')?.value;
@@ -204,14 +236,36 @@ export class CreateVueloComponent {
         updateBody.destinationAirportId = this.flightForm.get('destination_airport_id')?.value;
         updateBody.departureTime = this.flightForm.get('departure_time')?.value;
         updateBody.arrivalTime = this.flightForm.get('arrival_time')?.value;
-        this.vueloService.updateFlight(this.id, updateBody).subscribe();
+        this.vueloService.updateFlight(this.id, updateBody).subscribe(
+          (data: any) => {
+            if (this.isEditable) {
+              setTimeout(() => {
+                stepper.next();
+              }, 100);
+            }
+          }
+        );
       } else {
         this.vueloService.createFlight(body).subscribe((data: any) => {
-          console.log(data);
           this.temp_id = data.flightId;
           this.airline_id = data.airline.airline_id;
+          this.isEditable = true;
+          if (this.isEditable) {
+            setTimeout(() => {
+              stepper.next();
+            }, 100);
+          }
         });;
       }
+    } else {
+      this.snackBar.open(
+        'Rellene todos los campos obligatorios',
+        '',
+        {
+          duration: 3000,
+          panelClass: ['red-snackbar'],
+        }
+      );
     }
   }
 
@@ -238,12 +292,18 @@ export class CreateVueloComponent {
         this.escalaService.updateLeg(this.leg_id, updateBody).subscribe(data => {
           this.escalaService.getLegByFlightId(this.id).subscribe(data => {
             this.legs = data;
+            if (data.length != 0) {
+              this.isEscalaDone = true;
+            }
           });
         });
       } else {
         this.escalaService.createLeg(body).subscribe(data => {
           this.escalaService.getLegByFlightId(this.temp_id).subscribe(data => {
             this.legs = data;
+            if (data.length != 0) {
+              this.isEscalaDone = true;
+            }
           });
         });
       }
@@ -270,12 +330,18 @@ export class CreateVueloComponent {
         this.costoService.updateCost(this.cost_id, body).subscribe(data => {
           this.costoService.getCostsByFlightId(this.id).subscribe(data => {
             this.costs = data;
+            if (data.length != 0) {
+              this.isCostoDone = true;
+            }
           });
         });
       } else {
         this.costoService.createCost(body).subscribe(data => {
           this.costoService.getCostsByFlightId(this.temp_id).subscribe(data => {
             this.costs = data;
+            if (data.length != 0) {
+              this.isCostoDone = true;
+            }
           });
         });
       }

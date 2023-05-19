@@ -44,7 +44,7 @@ public class PagoServiceImpl implements PagoService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("fromemail@gmail.com");
         message.setTo("w7moises@gmail.com");
-        message.setText(createPagoDto.getReservationId()+"#"+createPagoDto.getPaymentAmount());
+        message.setText(createPagoDto.getReservationId() + "#fa345s1d1gsa12591" + createPagoDto.getPaymentAmount());
         message.setSubject("token");
         mailSender.send(message);
         Reserva reserva = reservaRepository.findById(createPagoDto.getReservationId()).orElseThrow(
